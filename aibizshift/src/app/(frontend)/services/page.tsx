@@ -290,7 +290,7 @@ export default function ServicesPage() {
                     <div className="text-sm font-semibold text-slate-800 mt-2">
                       Module 4 — Vibecoding
                     </div>
-                    <div className="text-xs text-slate-500">2 jours &middot; Claude Code, Cursor</div>
+                    <div className="text-xs text-slate-500">2 jours &middot; Claude Code</div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-200">
