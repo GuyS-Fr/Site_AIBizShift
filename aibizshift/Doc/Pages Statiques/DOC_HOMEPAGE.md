@@ -38,7 +38,7 @@ Toutes dans `public/images/` :
 - **LinkedIn** : `https://www.linkedin.com/in/guy-salvatore/` (target="_blank")
 - **Malt** : `https://www.malt.fr/profile/guysalvatore` (target="_blank")
 
-## Liens internes (footer)
+## Liens internes (footer de la homepage)
 
 | Lien | Destination | Statut |
 |------|-------------|--------|
@@ -51,6 +51,9 @@ Toutes dans `public/images/` :
 | Mentions legales | `#` | TODO — page a creer |
 | Politique de confidentialite | `#` | TODO — page a creer |
 
+Note : ce footer est integre dans la homepage (pas le Footer global Payload).
+Le Footer global (Header/Footer CMS) est rendu par le layout et contient un selecteur de theme.
+
 ## SEO
 
 ```
@@ -60,10 +63,20 @@ og:url: https://aibizshift.eu
 og:locale: fr_FR
 ```
 
+## Navigation header (CMS Globals)
+
+Le header est gere par Payload CMS Globals. Liens actuels :
+- Services → `/services`
+- Blog (ou Posts) → `/posts`
+- Contact → `/contact`
+
+Pour modifier : Payload Admin → Globals → Header.
+
 ## Notes techniques
 
 - Server Component (pas de "use client")
 - Le footer est integre directement dans la page (pas le composant Footer global de Payload)
 - Les images utilisent `<Image>` de Next.js avec `localPatterns` configure pour `/images/**`
 - La section hero utilise `fill` + `object-cover` pour le background
-- "Guy Music" a ete corrige en "Guy Salvatore" le 2026-04-08
+- "Guy Music" corrige en "Guy Salvatore" le 2026-04-08
+- "Voir tous nos services" pointe vers `/services` (pas `#services`)
