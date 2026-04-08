@@ -84,6 +84,7 @@ src/
   - `CRON_SECRET`, `PREVIEW_SECRET` (runtime)
   - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (runtime, pour le formulaire contact)
 - **Email:** SMTP via `@payloadcms/email-nodemailer` (variables SMTP_* dans Coolify)
+- **Stockage persistant:** Volume Mount `aibizshift-media` → `/app/public/media` (requis pour que les fichiers media survivent aux redeploiements)
 - **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
 
 ## Pages statiques
@@ -140,6 +141,7 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 - **/admin inaccessible en prod:** `serverURL` manquant dans `payload.config.ts`
 - **Build echoue:** `sassOptions` duplique dans `next.config.ts`
 - **Secrets exposes:** `.gitignore` racine ajoute avant passage en repo public
+- **Images media perdues apres redeploiement:** Volume Mount `aibizshift-media` → `/app/public/media` dans Coolify Persistent Storage
 
 ## Regles de securite critiques (Payload CMS)
 
