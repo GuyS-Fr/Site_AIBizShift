@@ -1,5 +1,8 @@
 # AIBizShift - Guide de developpement
 
+Site vitrine de Guy Salvatore, consultant IA & automatisation pour PME.
+Domaine : aibizshift.eu | Deploiement : Coolify (Docker) sur serveur souverain francais.
+
 ## Stack
 
 - **Framework:** Next.js 16 (App Router) + Payload CMS 3.81
@@ -41,15 +44,22 @@ tsc --noEmit                # Valider le TypeScript sans compiler
 ```
 src/
   app/
-    (frontend)/         # Routes publiques du site (pages, posts, search)
+    (frontend)/         # Routes publiques du site
+      page.tsx          # Homepage (statique)
+      services/         # Page Services (statique, 10 offres)
+      posts/            # Blog (via Payload CMS)
+      search/           # Recherche
+      [slug]/           # Pages dynamiques CMS (contact, etc.)
     (payload)/          # Admin Payload + routes API
   blocks/               # Blocs de contenu pour le layout builder
   collections/          # Definitions des collections Payload (Users, Posts, Pages)
   components/           # Composants React reutilisables
     ui/                 # Composants UI (style Shadcn)
+    Logo/               # Logo AIBizShift (texte stylise, pas d'image)
+    Media/              # Composant media (images + videos)
   heros/                # Variantes de sections hero
-  Header/               # Composant global Header
-  Footer/               # Composant global Footer
+  Header/               # Composant global Header (nav via CMS globals)
+  Footer/               # Composant global Footer (filtre /admin en prod)
   fields/               # Types de champs Payload personnalises
   endpoints/            # Endpoints API personnalises
   hooks/                # Hooks React personnalises
@@ -60,6 +70,31 @@ src/
   payload.config.ts     # Configuration principale Payload
   payload-types.ts      # Types auto-generes (ne pas modifier manuellement)
 ```
+
+## Deploiement
+
+- **Plateforme:** Coolify (Docker) sur serveur souverain
+- **Dockerfile:** A la racine `/Dockerfile` (gere le sous-dossier `aibizshift/`)
+- **Mode:** Next.js standalone (`output: 'standalone'` dans next.config.ts)
+- **Port:** 3000
+- **Domaine:** aibizshift.eu (HTTPS via Let's Encrypt)
+- **Variables d'environnement:** Configurees dans Coolify (build + runtime)
+  - `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL` (build + runtime)
+  - `CRON_SECRET`, `PREVIEW_SECRET` (runtime)
+
+## Pages statiques
+
+Les pages statiques sont dans `src/app/(frontend)/` et n'utilisent pas le layout builder Payload.
+Les specs de design sont dans `Doc/Pages Statiques/`.
+
+- **Homepage** (`page.tsx`) — Hero, probleme/solution, 4 services, credibilite, CTA audit
+- **Services** (`services/page.tsx`) — 10 offres detaillees, processus en 4 etapes, CTA
+
+## Images statiques
+
+Les images du site sont dans `public/images/`. Pour que Next.js les serve correctement :
+- `localPatterns` dans `next.config.ts` doit inclure `/images/**`
+- Le Dockerfile copie `public` APRES `standalone` (sinon les images sont ecrasees)
 
 ## Regles de securite critiques (Payload CMS)
 
