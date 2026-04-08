@@ -293,10 +293,7 @@ export default function ServicesPage() {
                     <div className="text-xs text-slate-500">2 jours &middot; Claude Code</div>
                   </div>
                 </div>
-                <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-200">
-                  <span className="text-slate-500">
-                    &Agrave; partir de 300&euro;/personne &middot; Finan&ccedil;able OPCO/CPF
-                  </span>
+                <div className="flex justify-end items-center mt-8 pt-6 border-t border-slate-200">
                   <a
                     href={CALENDLY_URL}
                     target="_blank"
