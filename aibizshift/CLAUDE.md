@@ -82,6 +82,7 @@ src/
 - **Variables d'environnement:** Configurees dans Coolify (build + runtime)
   - `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL` (build + runtime)
   - `CRON_SECRET`, `PREVIEW_SECRET` (runtime)
+  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (runtime, pour le formulaire contact)
 - **Email:** SMTP via `@payloadcms/email-nodemailer` (variables SMTP_* dans Coolify)
 - **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
 
@@ -92,6 +93,7 @@ Les specs de design sont dans `Doc/Pages Statiques/`.
 
 - **Homepage** (`page.tsx`) — Hero, probleme/solution, 4 services, credibilite, CTA audit
 - **Services** (`services/page.tsx`) — 10 offres detaillees, processus en 4 etapes, CTA
+- **Contact** — Page CMS via `[slug]`, formulaire gere par plugin form-builder + email SMTP
 
 ## Images statiques
 
@@ -126,6 +128,7 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 |---------|-------------|
 | `DOC_HOMEPAGE.md` | Doc technique de la homepage (sections, images, liens, SEO) |
 | `DOC_SERVICES.md` | Doc technique de la page services (offres, tarifs, processus) |
+| `DOC_CONTACT.md` | Doc technique du formulaire contact (SMTP, champs, emails) |
 | `PROMPT_CLAUDE_CODE_HOMEPAGE_V3.md` | Spec de design homepage (version courante) |
 | `PROMPT_CLAUDE_CODE_SERVICES.md` | Spec de design page services |
 | `PROMPT_CLAUDE_CODE_HOMEPAGE.md` | Spec homepage V1 (archive) |
