@@ -44,12 +44,12 @@ export async function POST(request: NextRequest) {
     const safeSubject = escapeHtml(subject)
     const safeMessage = escapeHtml(message)
 
-    const port = parseInt(process.env.SMTP_PORT || '587')
+    const port = parseInt(process.env.SMTP_PORT || '465')
+    const secure = process.env.SMTP_SECURE === 'false' ? false : port === 465
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port,
-      secure: port === 465,
-      requireTLS: port !== 465,
+      secure,
       tls: {
         rejectUnauthorized: false,
       },
