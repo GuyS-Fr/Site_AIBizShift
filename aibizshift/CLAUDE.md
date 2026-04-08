@@ -82,6 +82,7 @@ src/
 - **Variables d'environnement:** Configurees dans Coolify (build + runtime)
   - `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL` (build + runtime)
   - `CRON_SECRET`, `PREVIEW_SECRET` (runtime)
+- **Email:** SMTP via `@payloadcms/email-nodemailer` (variables SMTP_* dans Coolify)
 - **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
 
 ## Pages statiques
