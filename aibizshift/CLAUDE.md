@@ -84,8 +84,8 @@ src/
 - **Variables d'environnement:** Configurees dans Coolify (build + runtime)
   - `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL` (build + runtime)
   - `CRON_SECRET`, `PREVIEW_SECRET` (runtime)
-  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (runtime, pour le formulaire contact)
-- **Email:** SMTP via `@payloadcms/email-nodemailer` (variables SMTP_* dans Coolify)
+  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (runtime, Brevo pour le formulaire contact)
+- **Email:** SMTP via Brevo (smtp-relay.brevo.com:587) — OVH Zimbra SMTP incompatible avec nodemailer
 - **Stockage persistant:** Volume Mount `aibizshift-media` → `/app/public/media` (requis pour que les fichiers media survivent aux redeploiements)
 - **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
 
@@ -148,6 +148,7 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 - **/admin et routes dynamiques KO en prod:** DATABASE_URL doit utiliser l'URL interne Coolify (hostname Docker), pas l'IP publique du serveur
 - **Build Docker echoue sur cp media:** `public/media/` est gitignore, le Dockerfile gere le cas ou le dossier n'existe pas
 - **Upload media EACCES en prod:** Le volume mount cree le dossier en root. L'entrypoint fixe les permissions avant de lancer l'app via su-exec en tant que nextjs
+- **SMTP OVH Zimbra inaccessible:** zimbra1.mail.ovh.net ferme les connexions TLS, ssl0.ovh.net rejette les identifiants Zimbra. Solution : utiliser Brevo (smtp-relay.brevo.com:587)
 
 ## Regles de securite critiques (Payload CMS)
 

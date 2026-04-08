@@ -85,18 +85,23 @@ POST avec body JSON contenant tous les champs du formulaire.
 | `SMTP_PASS` | Mot de passe SMTP |
 | `SMTP_FROM` | Adresse d'expedition et de reception |
 
-### Configuration OVH Zimbra
+### Configuration SMTP — Brevo (recommande)
 
-Le compte email `contact@aibizshift.eu` est heberge chez OVH sur Zimbra.
-Attention : le serveur SMTP n'est PAS `ssl0.ovh.net` (MX Plan classique).
+OVH Zimbra SMTP ne fonctionne PAS avec nodemailer (connexions fermees, TLS incompatible).
+Utiliser **Brevo** (ex-Sendinblue) : gratuit jusqu'a 300 emails/jour, fiable.
 
 | Variable | Valeur |
 |----------|--------|
-| `SMTP_HOST` | `zimbra1.mail.ovh.net` |
-| `SMTP_PORT` | `587` (STARTTLS — le port 465 SSL echoue avec Zimbra) |
-| `SMTP_USER` | `contact@aibizshift.eu` |
+| `SMTP_HOST` | `smtp-relay.brevo.com` |
+| `SMTP_PORT` | `587` |
+| `SMTP_USER` | (login Brevo) |
+| `SMTP_PASS` | (cle SMTP Brevo) |
+| `SMTP_FROM` | `contact@aibizshift.eu` |
 
-Pour verifier le serveur : se connecter au webmail sur `https://zimbra1.mail.ovh.net/`.
+Important : verifier le domaine `aibizshift.eu` dans Brevo (Settings → Senders & IPs → Domains)
+pour eviter que les emails partent en spam.
+
+Le webmail OVH Zimbra reste sur `https://zimbra1.mail.ovh.net/` pour la reception.
 
 ## Colonne droite — Informations
 
