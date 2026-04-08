@@ -78,9 +78,11 @@ src/
 - **Mode:** Next.js standalone (`output: 'standalone'` dans next.config.ts)
 - **Port:** 3000
 - **Domaine:** aibizshift.eu (HTTPS via Let's Encrypt)
+- **Repo GitHub:** https://github.com/GuyS-Fr/Site_AIBizShift (public)
 - **Variables d'environnement:** Configurees dans Coolify (build + runtime)
   - `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL` (build + runtime)
   - `CRON_SECRET`, `PREVIEW_SECRET` (runtime)
+- **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
 
 ## Pages statiques
 
@@ -95,6 +97,45 @@ Les specs de design sont dans `Doc/Pages Statiques/`.
 Les images du site sont dans `public/images/`. Pour que Next.js les serve correctement :
 - `localPatterns` dans `next.config.ts` doit inclure `/images/**`
 - Le Dockerfile copie `public` APRES `standalone` (sinon les images sont ecrasees)
+
+## Branding
+
+- **Logo:** Texte stylise "AIBizShift" (composant `src/components/Logo/Logo.tsx`) — pas d'image SVG/PNG
+- **Nom du consultant:** Guy Salvatore (PAS "Guy Music")
+- **OpenGraph par defaut:** Configure dans `src/utilities/mergeOpenGraph.ts`
+- **Twitter creator:** `@aibizshift` (dans `src/app/(frontend)/layout.tsx`)
+- **Payload serverURL:** Configure dans `src/payload.config.ts` (necessaire pour /admin en production)
+
+## Navigation
+
+Le header et le footer globaux sont geres par **Payload CMS Globals** (base de donnees).
+Pour modifier les liens de navigation : Admin → Globals → Header / Footer.
+
+Le composant Footer (`src/Footer/Component.tsx`) filtre automatiquement le lien `/admin`.
+
+Le seed (`src/endpoints/seed/index.ts`) configure les nav items par defaut :
+- Header : Services, Blog, Contact
+- Footer : vide (liens Payload/Admin supprimes)
+
+## Documentation
+
+Toute la documentation est dans `Doc/Pages Statiques/` :
+
+| Fichier | Description |
+|---------|-------------|
+| `DOC_HOMEPAGE.md` | Doc technique de la homepage (sections, images, liens, SEO) |
+| `DOC_SERVICES.md` | Doc technique de la page services (offres, tarifs, processus) |
+| `PROMPT_CLAUDE_CODE_HOMEPAGE_V3.md` | Spec de design homepage (version courante) |
+| `PROMPT_CLAUDE_CODE_SERVICES.md` | Spec de design page services |
+| `PROMPT_CLAUDE_CODE_HOMEPAGE.md` | Spec homepage V1 (archive) |
+| `PROMPT_CLAUDE_CODE_HOMEPAGE_V2.md` | Spec homepage V2 (archive) |
+
+## Problemes resolus (reference)
+
+- **Images non affichees en prod:** `localPatterns` manquait `/images/**` + Dockerfile copiait `public` avant `standalone`
+- **/admin inaccessible en prod:** `serverURL` manquant dans `payload.config.ts`
+- **Build echoue:** `sassOptions` duplique dans `next.config.ts`
+- **Secrets exposes:** `.gitignore` racine ajoute avant passage en repo public
 
 ## Regles de securite critiques (Payload CMS)
 
