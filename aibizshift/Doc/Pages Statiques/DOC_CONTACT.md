@@ -79,11 +79,24 @@ POST avec body JSON contenant tous les champs du formulaire.
 
 | Variable | Description |
 |----------|-------------|
-| `SMTP_HOST` | Serveur SMTP (ex: ssl0.ovh.net) |
-| `SMTP_PORT` | Port (465 pour SSL, 587 pour TLS) |
+| `SMTP_HOST` | Serveur SMTP |
+| `SMTP_PORT` | Port (587 recommande pour TLS, 465 pour SSL) |
 | `SMTP_USER` | Adresse email d'authentification |
 | `SMTP_PASS` | Mot de passe SMTP |
 | `SMTP_FROM` | Adresse d'expedition et de reception |
+
+### Configuration OVH Zimbra
+
+Le compte email `contact@aibizshift.eu` est heberge chez OVH sur Zimbra.
+Attention : le serveur SMTP n'est PAS `ssl0.ovh.net` (MX Plan classique).
+
+| Variable | Valeur |
+|----------|--------|
+| `SMTP_HOST` | `zimbra1.mail.ovh.net` |
+| `SMTP_PORT` | `587` (STARTTLS — le port 465 SSL echoue avec Zimbra) |
+| `SMTP_USER` | `contact@aibizshift.eu` |
+
+Pour verifier le serveur : se connecter au webmail sur `https://zimbra1.mail.ovh.net/`.
 
 ## Colonne droite — Informations
 
