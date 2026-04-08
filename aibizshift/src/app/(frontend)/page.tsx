@@ -470,7 +470,7 @@ export default function HomePage() {
                 Navigation
               </div>
               <nav className="flex flex-col gap-2">
-                <a href="#services" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/services" className="text-slate-400 hover:text-white transition-colors">
                   Services
                 </a>
                 {/* TODO: remplacer # par la vraie URL quand la page Formations sera créée */}
@@ -481,8 +481,7 @@ export default function HomePage() {
                 <a href="#" className="text-slate-400 hover:text-white transition-colors">
                   Portfolio
                 </a>
-                {/* TODO: remplacer # par la vraie URL quand la page Blog sera créée */}
-                <a href="#" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/posts" className="text-slate-400 hover:text-white transition-colors">
                   Blog
                 </a>
                 {/* TODO: remplacer # par la vraie URL quand la page À propos sera créée */}
@@ -497,19 +496,19 @@ export default function HomePage() {
                 Services
               </div>
               <nav className="flex flex-col gap-2">
-                <a href="#services" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/services" className="text-slate-400 hover:text-white transition-colors">
                   Consulting IA
                 </a>
-                <a href="#services" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/services" className="text-slate-400 hover:text-white transition-colors">
                   Sites web
                 </a>
-                <a href="#services" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/services" className="text-slate-400 hover:text-white transition-colors">
                   Formation
                 </a>
-                <a href="#services" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/services" className="text-slate-400 hover:text-white transition-colors">
                   SaaS sur mesure
                 </a>
-                <a href="#services" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/services" className="text-slate-400 hover:text-white transition-colors">
                   Conciergerie IA
                 </a>
               </nav>
