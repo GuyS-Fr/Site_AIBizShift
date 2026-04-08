@@ -315,7 +315,7 @@ export default function HomePage() {
 
           <div className="mt-12 text-center">
             <a
-              href="#services"
+              href="/services"
               className="text-blue-500 hover:text-blue-700 font-semibold text-lg transition-colors"
             >
               Voir tous nos services &rarr;
@@ -459,7 +459,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
               <div className="text-2xl font-bold text-white">AIBizShift</div>
-              <div className="text-slate-400 mt-2">Guy Music</div>
+              <div className="text-slate-400 mt-2">Guy Salvatore</div>
               <div className="text-slate-400">Consultant IA & Automatisation</div>
               <div className="text-slate-500 mt-4 text-sm">Portes-lès-Valence (Drôme)</div>
               <div className="text-slate-500 text-sm">Interventions France entière</div>
@@ -473,15 +473,19 @@ export default function HomePage() {
                 <a href="#services" className="text-slate-400 hover:text-white transition-colors">
                   Services
                 </a>
+                {/* TODO: remplacer # par la vraie URL quand la page Formations sera créée */}
                 <a href="#" className="text-slate-400 hover:text-white transition-colors">
                   Formations
                 </a>
+                {/* TODO: remplacer # par la vraie URL quand la page Portfolio sera créée */}
                 <a href="#" className="text-slate-400 hover:text-white transition-colors">
                   Portfolio
                 </a>
+                {/* TODO: remplacer # par la vraie URL quand la page Blog sera créée */}
                 <a href="#" className="text-slate-400 hover:text-white transition-colors">
                   Blog
                 </a>
+                {/* TODO: remplacer # par la vraie URL quand la page À propos sera créée */}
                 <a href="#" className="text-slate-400 hover:text-white transition-colors">
                   À propos
                 </a>
@@ -522,13 +526,17 @@ export default function HomePage() {
                 contact@aibizshift.eu
               </a>
               <a
-                href="#"
+                href="https://www.linkedin.com/in/guy-salvatore/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-slate-400 hover:text-white mt-2 transition-colors"
               >
                 LinkedIn &rarr;
               </a>
               <a
-                href="#"
+                href="https://www.malt.fr/profile/guysalvatore"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block text-slate-400 hover:text-white mt-2 transition-colors"
               >
                 Malt &rarr;
@@ -549,9 +557,11 @@ export default function HomePage() {
               &copy; 2026 AIBizShift — Hébergé en France
             </div>
             <div className="flex gap-6">
+              {/* TODO: remplacer # par la vraie URL quand la page Mentions légales sera créée */}
               <a href="#" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
                 Mentions légales
               </a>
+              {/* TODO: remplacer # par la vraie URL quand la page Politique de confidentialité sera créée */}
               <a href="#" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
                 Politique de confidentialité
               </a>
