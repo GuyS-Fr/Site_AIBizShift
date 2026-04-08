@@ -24,12 +24,13 @@
 |---|-------|-------|--------|-------|
 | 1 | Consulting IA & Automatisation | `service-consulting.png` | Texte gauche, image droite | 500 EUR/jour |
 | 2 | Creation & Refonte Sites Web IA | `service-website.png` | Image gauche, texte droite | 1 500 EUR |
-| 3 | Formation IA & Automatisation | `service-formation.png` | Texte gauche, image droite | 300 EUR/personne |
+| 3 | Formation IA & Automatisation | `service-formation.png` | Texte gauche, image droite | Non affiche |
 | 4 | Developpement SaaS sur mesure | `service-saas.png` | Image gauche, texte droite | 5 000 EUR forfait |
 
 Chaque offre inclut : icone SVG, titre, description, liste de livrables (coches vertes), tarif, CTA Calendly.
 
 L'offre 3 (Formation) inclut une mini-grille de 4 modules avec badges de niveau.
+Module 4 (Vibecoding) : "2 jours · Claude Code" (Cursor supprime le 2026-04-08).
 
 ## Offres complementaires (section 3)
 
@@ -83,3 +84,4 @@ og:locale: fr_FR
 - Le footer n'est PAS dans cette page — il est rendu par le layout global `(frontend)/layout.tsx`
 - La route `/services` statique a priorite sur la route `[slug]` de Payload CMS
 - Le lien "Voir l'audit gratuit" pointe vers `#` (TODO: creer la page audit)
+- Le tarif Formation (300 EUR/personne OPCO/CPF) a ete supprime le 2026-04-08
