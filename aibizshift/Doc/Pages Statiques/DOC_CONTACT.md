@@ -1,76 +1,119 @@
-# Documentation — Formulaire Contact
+# Documentation — Page Contact
 
-## Page source
+## Fichiers source
 
-La page `/contact` est geree par Payload CMS via la route dynamique `[slug]/page.tsx`.
-Le formulaire est configure dans Payload Admin → Forms → Contact Form.
+- `src/app/(frontend)/contact/page.tsx` — Page (Server Component)
+- `src/components/ContactForm.tsx` — Formulaire (Client Component "use client")
+- `src/app/api/contact/route.ts` — API route envoi email
 
-## Architecture
+## Route
 
-1. **Frontend** : `src/blocks/Form/Component.tsx` (React, react-hook-form)
-2. **Soumission** : POST vers `/api/form-submissions` (API Payload)
-3. **Backend** : plugin `@payloadcms/plugin-form-builder` sauvegarde + envoie email
-4. **Email** : `@payloadcms/email-nodemailer` via SMTP
+`/contact` — Page statique. Priorite sur la route dynamique `[slug]` de Payload.
 
-## Champs du formulaire
+## Sections
 
-| Champ | Type | Requis |
-|-------|------|--------|
-| full-name | text | Oui |
-| email | email | Oui |
-| phone | number | Non |
-| message | textarea | Oui |
+| # | Section | Fond | Contenu principal |
+|---|---------|------|-------------------|
+| 1 | Hero | `#0F172A` | Titre "Parlons de votre projet", sous-titre |
+| 2 | Contenu | `#FAFAFA` | 2 colonnes : formulaire (3/5) + infos (2/5) |
 
-## Configuration email
+## Formulaire (colonne gauche)
 
-### Transport SMTP
+### Champs
 
-Configure dans `src/payload.config.ts` via `nodemailerAdapter()`.
+| Champ | Type | Requis | name |
+|-------|------|--------|------|
+| Nom complet | text | Oui | name |
+| Email | email | Oui | email |
+| Telephone | tel | Non | phone |
+| Entreprise | text | Non | company |
+| Sujet | select (7 options) | Oui | subject |
+| Message | textarea (5 rows) | Oui | message |
+| Consentement RGPD | checkbox | Oui | consent |
+| Honeypot (cache) | text hidden | - | website |
+
+### Options du sujet
+
+1. Audit gratuit de mon site web
+2. Consulting IA & Automatisation
+3. Creation ou refonte de site web
+4. Formation IA
+5. Developpement SaaS sur mesure
+6. Conciergerie IA locations
+7. Autre demande
+
+### Etats du formulaire
+
+- **idle** : formulaire vide
+- **loading** : bouton desactive "Envoi en cours..."
+- **success** : message de confirmation vert, bouton reset
+- **error** : message d'erreur rouge
+
+### Validation client
+
+- Champs obligatoires (name, email, subject, message, consent)
+- Format email regex
+- Consentement RGPD coche
+- Erreurs affichees sous chaque champ
+
+### Anti-spam
+
+Champ honeypot cache "website" — si rempli, l'API retourne succes sans envoyer d'email.
+
+## API Route (`/api/contact`)
+
+### Methode
+
+POST avec body JSON contenant tous les champs du formulaire.
+
+### Traitement
+
+1. Verification honeypot
+2. Validation serveur (champs requis, format email)
+3. Sanitization HTML (escapeHtml) pour prevenir XSS dans les emails
+4. Envoi de 2 emails via nodemailer :
+   - **Email notification** vers SMTP_FROM : tableau HTML avec toutes les donnees, reply-to visiteur
+   - **Email confirmation** au visiteur : message de remerciement + lien Calendly
 
 ### Variables d'environnement (Coolify, runtime)
 
 | Variable | Description |
 |----------|-------------|
-| `SMTP_HOST` | Serveur SMTP (ex: smtp.example.com) |
+| `SMTP_HOST` | Serveur SMTP (ex: ssl0.ovh.net) |
 | `SMTP_PORT` | Port (465 pour SSL, 587 pour TLS) |
 | `SMTP_USER` | Adresse email d'authentification |
 | `SMTP_PASS` | Mot de passe SMTP |
-| `SMTP_FROM` | Adresse d'expedition (ex: contact@aibizshift.eu) |
+| `SMTP_FROM` | Adresse d'expedition et de reception |
 
-### Configuration du formulaire (dans Payload Admin)
+## Colonne droite — Informations
 
-Le formulaire envoie un email a chaque soumission :
+3 blocs :
 
-- **De** : "AIBizShift" <contact@aibizshift.eu>
-- **A** : contact@aibizshift.eu (ou l'adresse configuree dans le champ emailTo)
-- **Reply-To** : {{email}} (email du visiteur)
-- **Sujet** : "Nouveau message de {{full-name}} via AIBizShift"
-- **Corps** : Contenu du message avec les variables du formulaire
+| Bloc | Contenu |
+|------|---------|
+| Calendly | Titre, description, CTA "Reserver un creneau" |
+| Coordonnees | Email, localisation, interventions, liens LinkedIn/Malt |
+| Audit gratuit | Description audit 236 pages, CTA gradient bleu/ambre |
 
-### Modifier le destinataire
+## Liens externes
 
-Pour changer l'adresse de reception :
-1. Payload Admin → Forms → Contact Form → Emails
-2. Modifier le champ **Email To**
-3. Sauvegarder
+- **Calendly** : `https://calendly.com/guy-salvatore/30min` (target="_blank")
+- **LinkedIn** : `https://www.linkedin.com/in/guy-salvatore/` (target="_blank")
+- **Malt** : `https://www.malt.fr/profile/guysalvatore` (target="_blank")
+- **Email** : `mailto:contact@aibizshift.eu`
 
-### Variables de template disponibles
+## SEO
 
-- `{{full-name}}` — Nom complet du visiteur
-- `{{email}}` — Email du visiteur
-- `{{phone}}` — Telephone du visiteur
-- `{{message}}` — Message du visiteur
-- `{{*}}` — Tous les champs
-- `{{*:table}}` — Tous les champs en tableau HTML
-
-## Seed
-
-Le seed (`src/endpoints/seed/contact-form.ts`) configure le formulaire par defaut.
-Il ne s'execute qu'au premier seeding. Pour modifier le formulaire existant,
-utiliser Payload Admin.
+```
+title: Contact — AIBizShift | Consultant IA & Automatisation | Valence, Drome
+description: Contactez Guy Salvatore, consultant IA & automatisation pour PME...
+og:url: https://aibizshift.eu/contact
+og:locale: fr_FR
+```
 
 ## Notes techniques
 
-- Le build affiche des warnings `ECONNREFUSED` si SMTP_HOST n'est pas configure — c'est normal
-- Le plugin form-builder gere automatiquement la collection `form-submissions`
-- Les soumissions sont toujours sauvegardees en base, meme si l'email echoue
+- Le formulaire est un Client Component importe dans la page Server Component
+- L'ancienne page contact CMS (via `[slug]`) est remplacee par cette page statique
+- L'API route est independante de Payload — elle utilise nodemailer directement
+- Le transport SMTP Payload (`@payloadcms/email-nodemailer` dans payload.config.ts) est separe

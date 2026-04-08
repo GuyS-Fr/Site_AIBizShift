@@ -47,6 +47,7 @@ src/
     (frontend)/         # Routes publiques du site
       page.tsx          # Homepage (statique)
       services/         # Page Services (statique, 10 offres)
+      contact/          # Page Contact (statique, formulaire custom)
       posts/            # Blog (via Payload CMS)
       search/           # Recherche
       [slug]/           # Pages dynamiques CMS (contact, etc.)
@@ -95,7 +96,7 @@ Les specs de design sont dans `Doc/Pages Statiques/`.
 
 - **Homepage** (`page.tsx`) — Hero, probleme/solution, 4 services, credibilite, CTA audit
 - **Services** (`services/page.tsx`) — 10 offres detaillees, processus en 4 etapes, CTA
-- **Contact** — Page CMS via `[slug]`, formulaire gere par plugin form-builder + email SMTP
+- **Contact** (`contact/page.tsx`) — Formulaire custom 7 champs + API route `/api/contact` (2 emails via nodemailer)
 
 ## Images statiques
 
@@ -130,7 +131,8 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 |---------|-------------|
 | `DOC_HOMEPAGE.md` | Doc technique de la homepage (sections, images, liens, SEO) |
 | `DOC_SERVICES.md` | Doc technique de la page services (offres, tarifs, processus) |
-| `DOC_CONTACT.md` | Doc technique du formulaire contact (SMTP, champs, emails) |
+| `DOC_CONTACT.md` | Doc technique de la page contact (formulaire, API, emails) |
+| `PROMPT_CLAUDE_CODE_CONTACT.md` | Spec de design page contact |
 | `PROMPT_CLAUDE_CODE_HOMEPAGE_V3.md` | Spec de design homepage (version courante) |
 | `PROMPT_CLAUDE_CODE_SERVICES.md` | Spec de design page services |
 | `PROMPT_CLAUDE_CODE_HOMEPAGE.md` | Spec homepage V1 (archive) |
