@@ -43,7 +43,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
 # Save seed media files so they can be copied to the volume on first launch
-RUN cp -r /app/public/media /app/public/media-seed
+RUN if [ -d /app/public/media ]; then cp -r /app/public/media /app/public/media-seed; else mkdir -p /app/public/media-seed /app/public/media; fi
 
 COPY --chown=nextjs:nodejs entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
