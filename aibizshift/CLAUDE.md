@@ -142,6 +142,7 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 - **Build echoue:** `sassOptions` duplique dans `next.config.ts`
 - **Secrets exposes:** `.gitignore` racine ajoute avant passage en repo public
 - **Images media perdues apres redeploiement:** Volume Mount `aibizshift-media` → `/app/public/media` dans Coolify Persistent Storage
+- **/admin et routes dynamiques KO en prod:** DATABASE_URL doit utiliser l'URL interne Coolify (hostname Docker), pas l'IP publique du serveur
 
 ## Regles de securite critiques (Payload CMS)
 
