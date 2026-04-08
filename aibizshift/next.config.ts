@@ -14,6 +14,7 @@ const NEXT_PUBLIC_SERVER_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
 const nextConfig: NextConfig = {
   output: 'standalone',
   sassOptions: {
+    silenceDeprecations: ['legacy-js-api'],
     includePaths: [
       path.resolve(dirname, 'node_modules/@payloadcms/ui/dist/scss'),
       path.resolve(dirname, 'node_modules'),
@@ -36,10 +37,6 @@ const nextConfig: NextConfig = {
         }
       }),
     ],
-  },
-  sassOptions: {
-    silenceDeprecations: ['legacy-js-api'],
-    includePaths: [path.resolve(dirname, 'node_modules')],
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
