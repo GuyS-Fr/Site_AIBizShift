@@ -77,6 +77,7 @@ src/
 - **Dockerfile:** A la racine `/Dockerfile` (gere le sous-dossier `aibizshift/`)
 - **Mode:** Next.js standalone (`output: 'standalone'` dans next.config.ts)
 - **Port:** 3000
+- **Entrypoint:** `entrypoint.sh` (fixe permissions media, puis lance node via su-exec en tant que nextjs)
 - **Domaine:** aibizshift.eu (HTTPS via Let's Encrypt)
 - **Repo GitHub:** https://github.com/GuyS-Fr/Site_AIBizShift (public)
 - **Variables d'environnement:** Configurees dans Coolify (build + runtime)
@@ -144,6 +145,7 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 - **Images media perdues apres redeploiement:** Volume Mount `aibizshift-media` → `/app/public/media` dans Coolify Persistent Storage
 - **/admin et routes dynamiques KO en prod:** DATABASE_URL doit utiliser l'URL interne Coolify (hostname Docker), pas l'IP publique du serveur
 - **Build Docker echoue sur cp media:** `public/media/` est gitignore, le Dockerfile gere le cas ou le dossier n'existe pas
+- **Upload media EACCES en prod:** Le volume mount cree le dossier en root. L'entrypoint fixe les permissions avant de lancer l'app via su-exec en tant que nextjs
 
 ## Regles de securite critiques (Payload CMS)
 
