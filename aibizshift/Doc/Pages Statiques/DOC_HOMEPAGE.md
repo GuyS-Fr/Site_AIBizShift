@@ -16,7 +16,7 @@
 | 2 | Probleme / Solution | `#FAFAFA` | 2 colonnes texte + image `before-after.png` |
 | 3 | Services | blanc | 4 cards avec images (consulting, website, formation, SaaS) |
 | 4 | Credibilite | `#0F172A` | 3 cards (expertise, builder, souverainete) avec icones SVG |
-| 5 | CTA Audit | gradient bleu `#1E40AF` → `#3B82F6` | Titre, description audit 236 pages, CTA Calendly, image mockup |
+| 5 | CTA Audit | gradient bleu `#1E40AF` → `#3B82F6` | Titre, description audit complet, CTA Calendly, image mockup |
 | 6 | Footer | `#0F172A` | 4 colonnes : marque, navigation, services, contact |
 
 ## Images utilisees

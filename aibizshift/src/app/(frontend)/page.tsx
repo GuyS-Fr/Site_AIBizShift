@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'AIBizShift — Consultant IA & Automatisation pour PME',
     description:
-      "Automatisez vos processus, gagnez du temps, générez plus de revenus grâce à l'IA. Audit gratuit 236 pages.",
+      "Automatisez vos processus, gagnez du temps, générez plus de revenus grâce à l'IA. Audit gratuit.",
     url: 'https://aibizshift.eu',
     siteName: 'AIBizShift',
     locale: 'fr_FR',
@@ -421,7 +421,7 @@ export default function HomePage() {
                 Votre site web perd des clients. Je peux vous le prouver.
               </h2>
               <p className="text-lg text-blue-100 leading-relaxed mt-6">
-                En 15 minutes, mon outil d&apos;analyse IA génère un rapport complet de 236 pages
+                En 15 minutes, mon outil d&apos;analyse IA génère un rapport complet
                 sur votre présence digitale : SEO, conversion, copywriting, positionnement
                 concurrentiel. Vous recevez la synthèse avec des recommandations actionnables —
                 gratuitement, sans engagement.
@@ -443,7 +443,7 @@ export default function HomePage() {
             <div>
               <Image
                 src="/images/audit-report-mockup.png"
-                alt="Aperçu du rapport d'audit digital de 236 pages généré par IA"
+                alt="Aperçu du rapport d'audit digital généré par IA"
                 width={800}
                 height={600}
                 className="rounded-xl shadow-2xl w-full max-w-md mx-auto -rotate-2"

@@ -23,7 +23,7 @@
 | 1 | OnPulse — Plateforme SaaS educative pour ESATs | En developpement — 80% (vert) | Image gauche | https://onpulse.aibizshift.eu |
 | 2 | AIBizShift.eu — Site vitrine consultant IA | En ligne (bleu) | Image droite | Pas de lien ("Vous y etes deja !") |
 | 3 | 40+ Workflows d'automatisation IA (n8n) | En production (emeraude) | Image gauche | Pas de lien |
-| 4 | Audit Marketing IA — Rapport 236 pages | Outil interne (violet) | Image droite | Pas de lien |
+| 4 | Audit Marketing IA — Rapport complet | Outil interne (violet) | Image droite | Pas de lien |
 
 ## Technologies par projet
 

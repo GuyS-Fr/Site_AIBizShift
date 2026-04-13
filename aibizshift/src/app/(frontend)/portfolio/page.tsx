@@ -166,11 +166,11 @@ export default function PortfolioPage() {
                   Outil interne
                 </span>
                 <h2 className="text-2xl font-semibold text-slate-800 mt-4">
-                  Audit Marketing IA &mdash; Rapport 236 pages
+                  Audit Marketing IA &mdash; Rapport complet
                 </h2>
                 <p className="text-slate-600 mt-4 leading-relaxed">
                   Outil d&apos;analyse automatis&eacute; qui g&eacute;n&egrave;re un rapport complet
-                  de 236 pages sur la pr&eacute;sence digitale d&apos;une entreprise&nbsp;: SEO
+                  sur la pr&eacute;sence digitale d&apos;une entreprise&nbsp;: SEO
                   technique, performance web, copywriting, UX, positionnement concurrentiel,
                   recommandations prioris&eacute;es. Utilis&eacute; comme lead magnet pour
                   l&apos;acquisition de clients.
@@ -190,7 +190,7 @@ export default function PortfolioPage() {
               <div className="overflow-hidden min-h-[16rem] order-1 md:order-2">
                 <Image
                   src="/images/audit-report-mockup.png"
-                  alt="Aper&ccedil;u du rapport d'audit digital de 236 pages"
+                  alt="Aper&ccedil;u du rapport d'audit digital"
                   width={800}
                   height={600}
                   className="w-full h-full object-cover"

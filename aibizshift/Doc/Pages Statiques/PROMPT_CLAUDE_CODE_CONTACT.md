@@ -192,7 +192,7 @@ Style liens : text-sm text-blue-500 hover:text-blue-700 font-semibold
 **Bloc 3 — Audit gratuit**
 Container : bg-gradient-to-br from-[#1E40AF] to-[#3B82F6] rounded-2xl p-8 text-white
 Titre (text-xl font-semibold) : "Audit gratuit"
-Description (text-blue-100 text-sm mt-2 leading-relaxed) : "Mon outil IA analyse votre site web et génère un rapport de 236 pages : SEO, conversion, copywriting. Gratuit, sans engagement."
+Description (text-blue-100 text-sm mt-2 leading-relaxed) : "Mon outil IA analyse votre site web et génère un rapport complet : SEO, conversion, copywriting. Gratuit, sans engagement."
 CTA (mt-4 inline-block) : "Demander mon audit →" → href="https://calendly.com/guy-salvatore/30min" target="_blank" rel="noopener noreferrer"
 Style : bg-amber-400 hover:bg-amber-500 text-slate-900 font-semibold px-6 py-3 rounded-lg transition-all text-sm
 

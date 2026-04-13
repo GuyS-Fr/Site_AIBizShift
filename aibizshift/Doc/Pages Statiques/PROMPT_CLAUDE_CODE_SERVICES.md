@@ -98,10 +98,10 @@ Icône : globe SVG (w-12 h-12 text-blue-500 mb-4)
 Titre : "Création & Refonte de Sites Web IA"
 
 Description :
-"Votre site web ne vous rapporte pas de clients ? Chaque projet démarre par un audit marketing automatisé de 236 pages qui identifie précisément les problèmes. Puis je crée un site moderne, rapide, SEO-optimisé et hébergé en France — pas sur un cloud américain."
+"Votre site web ne vous rapporte pas de clients ? Chaque projet démarre par un audit marketing automatisé qui identifie précisément les problèmes. Puis je crée un site moderne, rapide, SEO-optimisé et hébergé en France — pas sur un cloud américain."
 
 Livrables :
-- "Audit marketing automatisé complet (236 pages, 14 sections)"
+- "Audit marketing automatisé complet (14 sections)"
 - "Site professionnel avec blog intégré et panel admin"
 - "Optimisation SEO on-page et technique"
 - "Hébergement souverain RGPD (serveurs français)"

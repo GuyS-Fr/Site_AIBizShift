@@ -139,7 +139,7 @@ Titre (text-3xl md:text-4xl font-bold text-white) :
 "Votre site web perd des clients. Je peux vous le prouver."
 
 Paragraphe (text-lg text-blue-100 mt-6) :
-"En 15 minutes, mon outil d'analyse IA génère un rapport complet de 236 pages sur votre présence digitale : SEO, conversion, copywriting, positionnement concurrentiel. Vous recevez la synthèse avec des recommandations actionnables — gratuitement, sans engagement."
+"En 15 minutes, mon outil d'analyse IA génère un rapport complet sur votre présence digitale : SEO, conversion, copywriting, positionnement concurrentiel. Vous recevez la synthèse avec des recommandations actionnables — gratuitement, sans engagement."
 
 Bouton CTA (bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-10 py-5 rounded-xl text-lg mt-8 inline-block) :
 "Demander mon audit gratuit →"

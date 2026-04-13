@@ -112,7 +112,7 @@ Le webmail OVH Zimbra reste sur `https://zimbra1.mail.ovh.net/` pour la receptio
 |------|---------|
 | Calendly | Titre, description, CTA "Reserver un creneau" |
 | Coordonnees | Email, localisation, interventions, liens LinkedIn/Malt |
-| Audit gratuit | Description audit 236 pages, CTA gradient bleu/ambre |
+| Audit gratuit | Description audit complet, CTA gradient bleu/ambre |
 
 ## Liens externes
 

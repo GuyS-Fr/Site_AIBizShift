@@ -226,7 +226,7 @@ Titre (text-3xl md:text-4xl font-bold text-white leading-tight) :
 "Votre site web perd des clients. Je peux vous le prouver."
 
 Paragraphe (text-lg text-blue-100 leading-relaxed mt-6) :
-"En 15 minutes, mon outil d'analyse IA génère un rapport complet de 236 pages sur votre présence digitale : SEO, conversion, copywriting, positionnement concurrentiel. Vous recevez la synthèse avec des recommandations actionnables — gratuitement, sans engagement."
+"En 15 minutes, mon outil d'analyse IA génère un rapport complet sur votre présence digitale : SEO, conversion, copywriting, positionnement concurrentiel. Vous recevez la synthèse avec des recommandations actionnables — gratuitement, sans engagement."
 
 Bouton CTA (inline-block mt-8) :
 "Demander mon audit gratuit →" → href="https://calendly.com/guy-salvatore/30min" target="_blank" rel="noopener noreferrer"
@@ -236,7 +236,7 @@ Style : bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-10 py-5 roun
 "✓ Gratuit" · "✓ Sans engagement" · "✓ Résultats en 24h"
 
 **Colonne droite (image) :**
-Image `audit-report-mockup.png` (mockup du rapport d'audit 236 pages).
+Image `audit-report-mockup.png` (mockup du rapport d'audit).
 Style : rounded-xl shadow-2xl w-full max-w-md mx-auto, légère rotation (-rotate-2) pour un effet dynamique.
 
 ---
@@ -309,10 +309,10 @@ Droite : liens "Mentions légales" · "Politique de confidentialité" (text-sm t
 ```tsx
 export const metadata = {
   title: 'AIBizShift — Consultant IA & Automatisation pour PME | Valence, Drôme',
-  description: 'Guy Salvatore, consultant IA senior. J\'aide les PME et artisans à automatiser leurs processus, créer des sites web performants et se former à l\'IA. Audit gratuit 236 pages. Valence, Drôme — France entière.',
+  description: 'Guy Salvatore, consultant IA senior. J\'aide les PME et artisans à automatiser leurs processus, créer des sites web performants et se former à l\'IA. Audit gratuit. Valence, Drôme — France entière.',
   openGraph: {
     title: 'AIBizShift — Consultant IA & Automatisation pour PME',
-    description: 'Automatisez vos processus, gagnez du temps, générez plus de revenus grâce à l\'IA. Audit gratuit 236 pages.',
+    description: 'Automatisez vos processus, gagnez du temps, générez plus de revenus grâce à l\'IA. Audit gratuit.',
     url: 'https://aibizshift.eu',
     siteName: 'AIBizShift',
     locale: 'fr_FR',

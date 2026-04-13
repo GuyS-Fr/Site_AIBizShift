@@ -171,7 +171,7 @@ export default function ServicesPage() {
                 </h3>
                 <p className="text-lg text-slate-600 leading-relaxed mt-4">
                   Votre site web ne vous rapporte pas de clients ? Chaque projet d&eacute;marre par
-                  un audit marketing automatis&eacute; de 236 pages qui identifie
+                  un audit marketing automatis&eacute; qui identifie
                   pr&eacute;cis&eacute;ment les probl&egrave;mes. Puis je cr&eacute;e un site
                   moderne, rapide, SEO-optimis&eacute; et h&eacute;berg&eacute; en France — pas sur
                   un cloud am&eacute;ricain.
@@ -180,7 +180,7 @@ export default function ServicesPage() {
                   <li className="flex items-start gap-3">
                     <span className="text-green-500 font-bold mt-0.5">&#10003;</span>
                     <span className="text-slate-600">
-                      Audit marketing automatis&eacute; complet (236 pages, 14 sections)
+                      Audit marketing automatis&eacute; complet (14 sections)
                     </span>
                   </li>
                   <li className="flex items-start gap-3">

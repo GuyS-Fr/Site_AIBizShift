@@ -166,8 +166,8 @@ export default function ContactPage() {
               <div className="bg-gradient-to-br from-[#1E40AF] to-[#3B82F6] rounded-2xl p-8 text-white">
                 <h3 className="text-xl font-semibold">Audit gratuit</h3>
                 <p className="text-blue-100 text-sm mt-2 leading-relaxed">
-                  Mon outil IA analyse votre site web et g&eacute;n&egrave;re un rapport de 236
-                  pages : SEO, conversion, copywriting. Gratuit, sans engagement.
+                  Mon outil IA analyse votre site web et g&eacute;n&egrave;re un rapport
+                  complet : SEO, conversion, copywriting. Gratuit, sans engagement.
                 </p>
                 <a
                   href={CALENDLY_URL}
