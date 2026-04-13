@@ -46,10 +46,10 @@ Toutes dans `public/images/` :
 | Blog | `/posts` | Actif |
 | Consulting IA, Sites web, Formation, SaaS, Conciergerie | `/services` | Actif |
 | Formations | `#` | TODO — page a creer |
-| Portfolio | `#` | TODO — page a creer |
-| A propos | `#` | TODO — page a creer |
-| Mentions legales | `#` | TODO — page a creer |
-| Politique de confidentialite | `#` | TODO — page a creer |
+| Portfolio | `/portfolio` | Actif |
+| A propos | `/a-propos` | Actif |
+| Mentions legales | `/mentions-legales` | Actif |
+| Politique de confidentialite | `/confidentialite` | Actif |
 
 Note : ce footer est integre dans la homepage (pas le Footer global Payload).
 Le Footer global (Header/Footer CMS) est rendu par le layout et contient un selecteur de theme.

@@ -48,6 +48,10 @@ src/
       page.tsx          # Homepage (statique)
       services/         # Page Services (statique, 10 offres)
       contact/          # Page Contact (statique, formulaire custom)
+      a-propos/         # Page A propos (statique, parcours + differenciateurs)
+      portfolio/        # Page Portfolio (statique, 4 projets)
+      mentions-legales/ # Mentions legales (statique)
+      confidentialite/  # Politique de confidentialite (statique)
       posts/            # Blog (via Payload CMS)
       search/           # Recherche
       [slug]/           # Pages dynamiques CMS (contact, etc.)
@@ -97,6 +101,10 @@ Les specs de design sont dans `Doc/Pages Statiques/`.
 - **Homepage** (`page.tsx`) — Hero, probleme/solution, 4 services, credibilite, CTA audit
 - **Services** (`services/page.tsx`) — 10 offres detaillees, processus en 4 etapes, CTA
 - **Contact** (`contact/page.tsx`) — Formulaire custom 7 champs + API route `/api/contact` (2 emails via nodemailer)
+- **A propos** (`a-propos/page.tsx`) — Parcours, differenciateurs, chiffres cles, formation, CTA
+- **Portfolio** (`portfolio/page.tsx`) — 4 projets (OnPulse, AIBizShift, n8n, Audit) avec badges tech
+- **Mentions legales** (`mentions-legales/page.tsx`) — Editeur, hebergement, propriete intellectuelle
+- **Confidentialite** (`confidentialite/page.tsx`) — RGPD, donnees collectees, droits, cookies
 
 ## Images statiques
 
@@ -106,7 +114,7 @@ Les images du site sont dans `public/images/`. Pour que Next.js les serve correc
 
 ## Branding
 
-- **Logo:** Texte stylise "AIBizShift" (composant `src/components/Logo/Logo.tsx`) — pas d'image SVG/PNG. Adaptatif light/dark : fond sombre = blanc + bleu, fond clair = gris fonce + ambre
+- **Logo:** Texte stylise "AIBizShift" (composant `src/components/Logo/Logo.tsx`) — pas d'image SVG/PNG. Couleurs : AI ambre `#F59E0B` (fixe), Biz ardoise `#334155` clair / `#94A3B8` sombre, Shift bleu `#3B82F6` (fixe)
 - **Nom du consultant:** Guy Salvatore (PAS "Guy Music")
 - **OpenGraph par defaut:** Configure dans `src/utilities/mergeOpenGraph.ts`
 - **Twitter creator:** `@aibizshift` (dans `src/app/(frontend)/layout.tsx`)
@@ -132,6 +140,10 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 | `DOC_HOMEPAGE.md` | Doc technique de la homepage (sections, images, liens, SEO) |
 | `DOC_SERVICES.md` | Doc technique de la page services (offres, tarifs, processus) |
 | `DOC_CONTACT.md` | Doc technique de la page contact (formulaire, API, emails) |
+| `DOC_A_PROPOS.md` | Doc technique de la page a propos (parcours, chiffres, formation) |
+| `DOC_PORTFOLIO.md` | Doc technique de la page portfolio (4 projets, badges tech) |
+| `DOC_MENTIONS_LEGALES.md` | Doc technique des mentions legales |
+| `DOC_CONFIDENTIALITE.md` | Doc technique de la politique de confidentialite (RGPD) |
 | `PROMPT_CLAUDE_CODE_CONTACT.md` | Spec de design page contact |
 | `PROMPT_CLAUDE_CODE_HOMEPAGE_V3.md` | Spec de design homepage (version courante) |
 | `PROMPT_CLAUDE_CODE_SERVICES.md` | Spec de design page services |
