@@ -477,15 +477,13 @@ export default function HomePage() {
                 <a href="#" className="text-slate-400 hover:text-white transition-colors">
                   Formations
                 </a>
-                {/* TODO: remplacer # par la vraie URL quand la page Portfolio sera créée */}
-                <a href="#" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/portfolio" className="text-slate-400 hover:text-white transition-colors">
                   Portfolio
                 </a>
                 <a href="/posts" className="text-slate-400 hover:text-white transition-colors">
                   Blog
                 </a>
-                {/* TODO: remplacer # par la vraie URL quand la page À propos sera créée */}
-                <a href="#" className="text-slate-400 hover:text-white transition-colors">
+                <a href="/a-propos" className="text-slate-400 hover:text-white transition-colors">
                   À propos
                 </a>
               </nav>
@@ -556,13 +554,11 @@ export default function HomePage() {
               &copy; 2026 AIBizShift — Hébergé en France
             </div>
             <div className="flex gap-6">
-              {/* TODO: remplacer # par la vraie URL quand la page Mentions légales sera créée */}
-              <a href="#" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
-                Mentions légales
+              <a href="/mentions-legales" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
+                Mentions l&eacute;gales
               </a>
-              {/* TODO: remplacer # par la vraie URL quand la page Politique de confidentialité sera créée */}
-              <a href="#" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
-                Politique de confidentialité
+              <a href="/confidentialite" className="text-sm text-slate-500 hover:text-slate-300 transition-colors">
+                Politique de confidentialit&eacute;
               </a>
             </div>
           </div>
