@@ -81,6 +81,7 @@ POST avec body JSON contenant tous les champs du formulaire.
 |----------|-------------|
 | `SMTP_HOST` | Serveur SMTP |
 | `SMTP_PORT` | Port (587 recommande pour TLS, 465 pour SSL) |
+| `SMTP_SECURE` | `true` (SSL, port 465) ou `false` (STARTTLS, port 587). Si absent, auto-detecte selon le port |
 | `SMTP_USER` | Adresse email d'authentification |
 | `SMTP_PASS` | Mot de passe SMTP |
 | `SMTP_FROM` | Adresse d'expedition et de reception |

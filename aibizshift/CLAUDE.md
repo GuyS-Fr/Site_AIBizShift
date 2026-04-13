@@ -84,7 +84,7 @@ src/
 - **Variables d'environnement:** Configurees dans Coolify (build + runtime)
   - `DATABASE_URL`, `PAYLOAD_SECRET`, `NEXT_PUBLIC_SERVER_URL` (build + runtime)
   - `CRON_SECRET`, `PREVIEW_SECRET` (runtime)
-  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (runtime, Brevo pour le formulaire contact)
+  - `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (runtime, Brevo pour le formulaire contact)
 - **Email:** SMTP via Brevo (smtp-relay.brevo.com:587) — OVH Zimbra SMTP incompatible avec nodemailer
 - **Stockage persistant:** Volume Mount `aibizshift-media` → `/app/public/media` (requis pour que les fichiers media survivent aux redeploiements)
 - **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
@@ -149,6 +149,7 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 - **Build Docker echoue sur cp media:** `public/media/` est gitignore, le Dockerfile gere le cas ou le dossier n'existe pas
 - **Upload media EACCES en prod:** Le volume mount cree le dossier en root. L'entrypoint fixe les permissions avant de lancer l'app via su-exec en tant que nextjs
 - **SMTP OVH Zimbra inaccessible:** zimbra1.mail.ovh.net ferme les connexions TLS, ssl0.ovh.net rejette les identifiants Zimbra. Solution : utiliser Brevo (smtp-relay.brevo.com:587)
+- **Images blog non affichees (cards "No image" + media blocks casses):** Les cards utilisaient `meta.image` (SEO) au lieu de `heroImage`. Fix : fallback `heroImage` dans Card + ajout `/media/**` aux `localPatterns` de next.config.ts
 
 ## Regles de securite critiques (Payload CMS)
 

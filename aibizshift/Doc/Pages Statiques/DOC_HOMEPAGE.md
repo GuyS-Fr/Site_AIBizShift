@@ -65,9 +65,10 @@ og:locale: fr_FR
 
 ## Navigation header (CMS Globals)
 
-Le header est gere par Payload CMS Globals. Liens actuels :
+Le header est gere par Payload CMS Globals. Liens actuels (au 2026-04-13) :
+- Accueil → `/`
 - Services → `/services`
-- Blog (ou Posts) → `/posts`
+- Posts → `/posts`
 - Contact → `/contact`
 
 Pour modifier : Payload Admin → Globals → Header.
