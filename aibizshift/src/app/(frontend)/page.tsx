@@ -458,7 +458,11 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
-              <div className="text-2xl font-bold text-white">AIBizShift</div>
+              <div className="text-2xl font-bold">
+                <span className="text-[#F59E0B]">AI</span>
+                <span className="text-[#94A3B8]">Biz</span>
+                <span className="text-[#3B82F6]">Shift</span>
+              </div>
               <div className="text-slate-400 mt-2">Guy Salvatore</div>
               <div className="text-slate-400">Consultant IA & Automatisation</div>
               <div className="text-slate-500 mt-4 text-sm">Portes-lès-Valence (Drôme)</div>
