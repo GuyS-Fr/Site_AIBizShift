@@ -106,7 +106,7 @@ Les images du site sont dans `public/images/`. Pour que Next.js les serve correc
 
 ## Branding
 
-- **Logo:** Texte stylise "AIBizShift" (composant `src/components/Logo/Logo.tsx`) — pas d'image SVG/PNG
+- **Logo:** Texte stylise "AIBizShift" (composant `src/components/Logo/Logo.tsx`) — pas d'image SVG/PNG. Adaptatif light/dark : fond sombre = blanc + bleu, fond clair = gris fonce + ambre
 - **Nom du consultant:** Guy Salvatore (PAS "Guy Music")
 - **OpenGraph par defaut:** Configure dans `src/utilities/mergeOpenGraph.ts`
 - **Twitter creator:** `@aibizshift` (dans `src/app/(frontend)/layout.tsx`)
