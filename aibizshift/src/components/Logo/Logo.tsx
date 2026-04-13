@@ -11,8 +11,8 @@ export const Logo = (props: Props) => {
   const { className } = props
 
   return (
-    <span className={clsx('text-2xl font-bold text-white', className)}>
-      AI<span className="text-blue-400">Biz</span>Shift
+    <span className={clsx('text-2xl font-bold text-slate-800 dark:text-white', className)}>
+      AI<span className="text-amber-500 dark:text-blue-400">Biz</span>Shift
     </span>
   )
 }
