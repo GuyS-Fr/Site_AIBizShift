@@ -75,13 +75,12 @@ og:locale: fr_FR
 
 ## Navigation header (CMS Globals)
 
-Le header est gere par Payload CMS Globals. Liens actuels (au 2026-04-13) :
-- Accueil → `/`
+Le header est gere par Payload CMS Globals. Le seed (`src/endpoints/seed/index.ts`) initialise 3 items :
 - Services → `/services`
-- Posts → `/posts`
+- Blog → `/posts`
 - Contact → `/contact`
 
-Pour modifier : Payload Admin → Globals → Header.
+Les items reellement affiches proviennent de la base de donnees. Pour modifier : Payload Admin → Globals → Header.
 
 ## Notes techniques
 
@@ -92,3 +91,7 @@ Pour modifier : Payload Admin → Globals → Header.
 - "Guy Music" corrige en "Guy Salvatore" le 2026-04-08
 - "Voir tous nos services" pointe vers `/services` (pas `#services`)
 - 2026-04-17 : le CTA "Demander mon audit gratuit" (section 5) pointe vers `/contact` (formulaire) au lieu de Calendly. Les CTA Hero principal et footer mini-CTA restent sur Calendly (RDV direct).
+
+## Historique des modifications doc
+
+- 2026-04-17 : Navigation header corrigee (Services/Blog/Contact — valeurs reelles du seed, au lieu de Accueil/Services/Posts/Contact).

@@ -59,4 +59,8 @@ description: Decouvrez le parcours de Guy Salvatore : 35 ans chez Orange/France 
 
 - Server Component (pas de "use client")
 - Meme style de cards que la section credibilite de la homepage
-- Photo placeholder a remplacer par une vraie photo
+- Photo reelle de Guy Salvatore en place (`public/images/guy-salvatore.jpg`) — placeholder remplace le 2026-04-13
+
+## Historique des modifications doc
+
+- 2026-04-17 : Mention "photo placeholder a remplacer" retiree (photo reelle en place depuis commit 21fd19a).
