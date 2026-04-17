@@ -154,6 +154,9 @@ Documentation compliance dans `Doc/COMPLIANCE/` :
 |---------|-------------|
 | `ROPA.md` | Registre des activites de traitement (Art. 30 RGPD / Art. 12 nLPD) |
 | `INCIDENT_RESPONSE.md` | Procedure 72h notification violation (Art. 33-34 RGPD / Art. 24 nLPD) |
+| `TIA_CALENDLY.md` | Transfer Impact Assessment Calendly (EDPB Schrems II) |
+| `AI_USE_POLICY.md` | Politique d'usage de l'IA (AI Act Art. 4 litteratie + inventaire systemes) |
+| `templates/data-subject-request-response.md` | Templates reponses demandes RGPD/nLPD (acces, rectification, effacement, etc.) |
 
 Rapport d'audit a la racine du repo : `COMPLIANCE_REPORT.md` + `COMPLIANCE_REPORT.html`.
 | `PROMPT_CLAUDE_CODE_CONTACT.md` | Spec de design page contact |
