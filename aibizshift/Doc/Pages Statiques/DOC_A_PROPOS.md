@@ -12,7 +12,7 @@
 
 | # | Section | Fond | Contenu principal |
 |---|---------|------|-------------------|
-| 1 | Hero | `#0F172A` | 2 colonnes : titre + sous-titre a gauche, placeholder photo a droite |
+| 1 | Hero | `#0F172A` | 2 colonnes : titre "De Orange a l'IA : 35 ans a resoudre des problemes complexes" + sous-titre a gauche, photo de Guy Salvatore a droite |
 | 2 | Parcours | `#FAFAFA` | Storytelling en prose (France Telecom, international, independant) |
 | 3 | Differenciation | blanc | 3 cards avec icones ambre (metier, builder, souverainete) |
 | 4 | Chiffres | `#0F172A` | Grid 2x3 metriques ambre (35 ans, 3 continents, 40+ workflows, etc.) |
@@ -40,8 +40,9 @@
 
 ## Image
 
-- Placeholder photo : div gris `bg-slate-700` rounded-2xl h-80 w-64 avec texte "Photo a venir"
-- TODO : remplacer par `public/images/guy-salvatore.jpg` quand disponible
+- Photo hero : `public/images/guy-salvatore.jpg` affichee via `next/image` en mode `fill` dans un conteneur `relative h-80 w-64 rounded-2xl overflow-hidden` avec `object-cover`
+- Attribut `priority` (image above-the-fold pour LCP)
+- Visible uniquement en md+ (classe `hidden md:flex` sur le wrapper)
 
 ## Liens externes
 

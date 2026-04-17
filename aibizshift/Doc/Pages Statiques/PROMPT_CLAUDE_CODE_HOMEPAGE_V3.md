@@ -45,7 +45,7 @@ Les images sont dans le dossier `public/images/`. Utilise le composant `<Image>`
 
 ## NAVIGATION HEADER
 
-Logo texte "AIBizShift" à gauche.
+Logo image `public/images/logo3-horizontal-dark.png` à gauche (rendu via `next/image`, `h-20 w-auto`). Le PNG inclut un fond sombre qui se fond avec le header.
 Liens de navigation à droite : Blog (lien vers /posts), Services (lien vers /services), Contact (lien vers /contact), Search (lien vers /search).
 PAS de lien "Admin" visible — le panel admin ne doit JAMAIS apparaître dans la navigation publique.
 Style : fond transparent sur le hero, texte blanc.

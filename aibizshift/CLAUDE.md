@@ -61,7 +61,7 @@ src/
   collections/          # Definitions des collections Payload (Users, Posts, Pages, ContactSubmissions)
   components/           # Composants React reutilisables
     ui/                 # Composants UI (style Shadcn)
-    Logo/               # Logo AIBizShift (texte stylise, pas d'image)
+    Logo/               # Logo AIBizShift (image public/images/logo3-horizontal-dark.png via next/image)
     Media/              # Composant media (images + videos)
   heros/                # Variantes de sections hero
   Header/               # Composant global Header (nav via CMS globals)
@@ -118,7 +118,7 @@ Les images du site sont dans `public/images/`. Pour que Next.js les serve correc
 
 ## Branding
 
-- **Logo:** Texte stylise "AIBizShift" (composant `src/components/Logo/Logo.tsx`) — pas d'image SVG/PNG. Couleurs : AI ambre `#F59E0B` (fixe), Biz ardoise `#334155` clair / `#94A3B8` sombre, Shift bleu `#3B82F6` (fixe)
+- **Logo:** Image `public/images/logo3-horizontal-dark.png` (748x300, fond sombre inclus) rendue via `next/image` dans le composant `src/components/Logo/Logo.tsx` — taille d'affichage `h-20 w-auto` (80px de haut). Le fond sombre du PNG se fond avec les fonds sombres du Header et du Footer (bg-black/dark:bg-card)
 - **Nom du consultant:** Guy Salvatore (PAS "Guy Music")
 - **OpenGraph par defaut:** Configure dans `src/utilities/mergeOpenGraph.ts`
 - **Twitter creator:** `@aibizshift` (dans `src/app/(frontend)/layout.tsx`)
