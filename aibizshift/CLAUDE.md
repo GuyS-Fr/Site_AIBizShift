@@ -93,6 +93,7 @@ src/
   - `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (runtime, Brevo pour le formulaire contact)
 - **Email:** SMTP via Brevo (smtp-relay.brevo.com:587) — OVH Zimbra SMTP incompatible avec nodemailer
 - **Stockage persistant:** Volume Mount `aibizshift-media` → `/app/public/media` (requis pour que les fichiers media survivent aux redeploiements)
+- **Migrations Payload:** Auto-appliquees au demarrage via `prodMigrations` (`@payloadcms/db-postgres` declenche `migrate()` quand `NODE_ENV=production` + `prodMigrations` est defini). Desactive pendant `next build` via `NEXT_PHASE === 'phase-production-build'` pour eviter de migrer au build time. En dev : `pnpm payload migrate` manuel (push mode desactive avec `push: false`)
 - **Cron Coolify (compliance):** un cron quotidien doit appeler `POST /api/payload-jobs/run` avec `Authorization: Bearer $CRON_SECRET` et body `{"queue":"default"}` pour declencher la task `purgeOldSubmissions` (purge auto des contact-submissions > 24 mois — RGPD Art. 5(1)(e))
 - **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
 

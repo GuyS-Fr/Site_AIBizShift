@@ -14,6 +14,7 @@ import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { purgeOldSubmissions } from './jobs/purgeOldSubmissions'
+import { migrations } from './migrations'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -65,6 +66,9 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
     },
+    prodMigrations:
+      process.env.NEXT_PHASE === 'phase-production-build' ? undefined : migrations,
+    push: false,
   }),
   collections: [Pages, Posts, Media, Categories, Users, ContactSubmissions],
   cors: [getServerSideURL()].filter(Boolean),
