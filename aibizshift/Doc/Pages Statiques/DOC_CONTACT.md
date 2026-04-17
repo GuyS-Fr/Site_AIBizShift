@@ -124,6 +124,8 @@ Le webmail OVH Zimbra reste sur `https://zimbra1.mail.ovh.net/` pour la receptio
 
 ## Collection Payload `contact-submissions`
 
+> Schema DB trace par migration : `src/migrations/20260417_124957_add_contact_submissions.ts`. Auto-appliquee au demarrage du conteneur en prod (voir section "Migrations Payload" dans `CLAUDE.md`).
+
 | Champ | Type | Notes |
 |-------|------|-------|
 | `name` | text | Requis |
@@ -227,3 +229,4 @@ aux demandes d'exercice de droits RGPD/nLPD, utiliser les templates dans
   - Logs `console.error` masques (m-03)
   - Note transfert US Calendly dans email confirmation (m-07)
   - Templates DSR + AI_USE_POLICY references depuis cette doc
+  - Schema `contact-submissions` trace via migration Payload (`src/migrations/`) avec auto-apply prod via `prodMigrations`

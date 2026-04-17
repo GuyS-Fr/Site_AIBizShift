@@ -167,6 +167,36 @@ Rapport d'audit a la racine du repo : `COMPLIANCE_REPORT.md` + `COMPLIANCE_REPOR
 | `PROMPT_CLAUDE_CODE_HOMEPAGE.md` | Spec homepage V1 (archive) |
 | `PROMPT_CLAUDE_CODE_HOMEPAGE_V2.md` | Spec homepage V2 (archive) |
 
+## Migrations Payload
+
+Le schema PostgreSQL est trace via les migrations dans `src/migrations/` (generees par `@payloadcms/db-postgres`).
+
+### Workflow dev
+
+```bash
+pnpm payload migrate:create <nom>   # genere un .ts delta + .json snapshot
+# editer le .ts si besoin (IF NOT EXISTS pour idempotence sur DB existante)
+pnpm payload migrate                # applique (local)
+```
+
+> `push: false` dans `payload.config.ts` → pas de sync automatique en dev. Toute modif de schema passe par une migration.
+
+### Workflow prod (Coolify)
+
+**Auto-apply au demarrage du conteneur** : le postgres adapter declenche `migrate()` quand `NODE_ENV=production` + `prodMigrations` est defini dans la config (`payload.config.ts`).
+
+> Garde-fou : `prodMigrations` est `undefined` quand `NEXT_PHASE === 'phase-production-build'` pour eviter que le build Docker applique les migrations. Seul le runtime les execute.
+
+### Fichiers
+
+- `src/migrations/index.ts` — registre auto-genere (ne pas editer manuellement, regenere par `migrate:create`)
+- `src/migrations/YYYYMMDD_HHMMSS_<nom>.ts` — migration DDL (up/down)
+- `src/migrations/YYYYMMDD_HHMMSS_<nom>.json` — snapshot schema (diff reference pour la prochaine migration)
+
+### Script utilitaire
+
+`scripts/clear-dev-migration-marker.ts` — supprime la ligne `batch=-1` de `payload_migrations` (marqueur dev-push) si la DB a ete alimentee en push mode avant l'adoption des migrations. A run une seule fois par DB : `pnpm tsx scripts/clear-dev-migration-marker.ts`.
+
 ## Problemes resolus (reference)
 
 - **Images non affichees en prod:** `localPatterns` manquait `/images/**` + Dockerfile copiait `public` avant `standalone`
@@ -180,6 +210,7 @@ Rapport d'audit a la racine du repo : `COMPLIANCE_REPORT.md` + `COMPLIANCE_REPOR
 - **SMTP OVH Zimbra inaccessible:** zimbra1.mail.ovh.net ferme les connexions TLS, ssl0.ovh.net rejette les identifiants Zimbra. Solution : utiliser Brevo (smtp-relay.brevo.com:587)
 - **Images blog non affichees (cards "No image" + media blocks casses):** Les cards utilisaient `meta.image` (SEO) au lieu de `heroImage`. Fix : fallback `heroImage` dans Card + ajout `/media/**` aux `localPatterns` de next.config.ts
 - **Vulnerabilite TLS dans /api/contact (audit 2026-04-17):** `tls.rejectUnauthorized: false` etait un vestige du contournement OVH Zimbra qui n'a plus lieu d'etre. Supprime — Brevo a un certificat valide
+- **/admin KO `column payload_locked_documents__rels.contact_submissions_id does not exist` (2026-04-17):** La collection `ContactSubmissions` avait ete ajoutee en code mais jamais migree en DB (push mode s'etait arrete avant). Fix : ajout du systeme de migrations Payload (`src/migrations/`) + migration delta idempotente (IF NOT EXISTS) + `prodMigrations` pour auto-apply en prod. Nettoyage du marqueur `batch=-1` (dev-push) via `scripts/clear-dev-migration-marker.ts`
 
 ## Compliance RGPD / nLPD
 
