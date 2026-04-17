@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 
 export const metadata: Metadata = {
   title: '\u00c0 propos \u2014 Guy Salvatore | AIBizShift \u2014 Consultant IA & Automatisation',
@@ -27,8 +28,15 @@ export default function AProposPage() {
               </p>
             </div>
             <div className="hidden md:flex justify-center">
-              <div className="bg-slate-700 rounded-2xl h-80 w-64 flex items-center justify-center">
-                <span className="text-slate-400 text-sm">Photo &agrave; venir</span>
+              <div className="relative h-80 w-64 rounded-2xl overflow-hidden">
+                <Image
+                  src="/images/guy-salvatore.jpg"
+                  alt="Guy Salvatore, consultant IA et automatisation"
+                  fill
+                  sizes="256px"
+                  priority
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>

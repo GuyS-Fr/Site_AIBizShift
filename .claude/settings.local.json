@@ -19,7 +19,10 @@
       "Bash(netstat -ano)",
       "Bash(pnpm payload *)",
       "Bash(pnpm dev *)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "mcp__chrome-devtools__new_page",
+      "mcp__chrome-devtools__resize_page",
+      "mcp__chrome-devtools__take_screenshot"
     ]
   }
 }
