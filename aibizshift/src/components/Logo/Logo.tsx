@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import Image from 'next/image'
 import React from 'react'
 
 interface Props {
@@ -8,13 +9,17 @@ interface Props {
 }
 
 export const Logo = (props: Props) => {
-  const { className } = props
+  const { className, loading = 'lazy', priority } = props
 
   return (
-    <span className={clsx('text-2xl font-bold', className)}>
-      <span className="text-[#F59E0B]">AI</span>
-      <span className="text-[#334155] dark:text-[#94A3B8]">Biz</span>
-      <span className="text-[#3B82F6]">Shift</span>
-    </span>
+    <Image
+      src="/images/logo3-horizontal-dark.png"
+      alt="AIBizShift"
+      width={748}
+      height={300}
+      loading={loading}
+      priority={priority === 'high'}
+      className={clsx('h-10 w-auto', className)}
+    />
   )
 }
