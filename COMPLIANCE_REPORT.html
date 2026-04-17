@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rapport de conformité — AIBizShift</title>
+<style>
+  :root {
+    --bg: #0F172A;
+    --card: #1E293B;
+    --text: #E2E8F0;
+    --muted: #94A3B8;
+    --accent: #3B82F6;
+    --amber: #F59E0B;
+    --red: #EF4444;
+    --orange: #F97316;
+    --yellow: #EAB308;
+    --green: #10B981;
+    --gray: #64748B;
+    --border: #334155;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #FAFAFA;
+    color: #1E293B;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+  }
+  .header {
+    background: linear-gradient(135deg, #0F172A 0%, #1E40AF 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+  .header h1 { margin: 0; font-size: 2.2rem; }
+  .header .subtitle { color: #BFDBFE; margin-top: 0.5rem; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  .stat {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .stat .label { color: var(--muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  .stat .value { font-size: 2rem; font-weight: bold; margin-top: 0.5rem; }
+  .stat.score-critical .value { color: var(--red); }
+  .stat.score-warning .value { color: var(--orange); }
+  .stat.score-ok .value { color: var(--green); }
+  .stat.score-na .value { color: var(--gray); font-size: 1.4rem; }
+  .verdict {
+    background: #FEF2F2;
+    border-left: 4px solid var(--red);
+    padding: 1.5rem;
+    border-radius: 6px;
+    margin: 1.5rem 0;
+  }
+  h2 {
+    color: #0F172A;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 0.5rem;
+    margin-top: 3rem;
+  }
+  h3 { color: #1E293B; margin-top: 2rem; }
+  h4 { color: #334155; margin-top: 1.5rem; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  th, td {
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #E2E8F0;
+    vertical-align: top;
+    font-size: 0.92rem;
+  }
+  th { background: #F1F5F9; font-weight: 600; color: #475569; }
+  tr:last-child td { border-bottom: none; }
+  code {
+    background: #F1F5F9;
+    color: #0F172A;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-family: 'SF Mono', Consolas, monospace;
+  }
+  .status { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; }
+  .status-ok { background: #D1FAE5; color: #065F46; }
+  .status-warn { background: #FEF3C7; color: #92400E; }
+  .status-fail { background: #FEE2E2; color: #991B1B; }
+  .status-na { background: #E2E8F0; color: #475569; }
+  .status-check { background: #DBEAFE; color: #1E40AF; }
+  .finding {
+    background: white;
+    padding: 1.25rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border-left: 4px solid var(--gray);
+  }
+  .finding.critical { border-left-color: var(--red); background: #FEF2F2; }
+  .finding.major { border-left-color: var(--orange); background: #FFF7ED; }
+  .finding.minor { border-left-color: var(--yellow); background: #FEFCE8; }
+  .finding-id {
+    display: inline-block;
+    background: #1E293B;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+  .finding.critical .finding-id { background: var(--red); }
+  .finding.major .finding-id { background: var(--orange); }
+  .finding.minor .finding-id { background: var(--yellow); color: #1E293B; }
+  .footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 2rem;
+    font-size: 0.9rem;
+  }
+  .toc {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+    margin: 2rem 0;
+  }
+  .toc ul { padding-left: 1.5rem; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 Rapport de conformité</h1>
+  <div class="subtitle">AIBizShift — RGPD UE + AI Act + nLPD Suisse</div>
+  <div class="subtitle">Audit du 17 avril 2026</div>
+</div>
+
+<div class="container">
+
+  <h2>📊 Résumé exécutif</h2>
+
+  <div class="summary-grid">
+    <div class="stat score-critical">
+      <div class="label">Score global</div>
+      <div class="value">49 % 🔴</div>
+    </div>
+    <div class="stat score-warning">
+      <div class="label">RGPD UE</div>
+      <div class="value">55 % 🟠</div>
+    </div>
+    <div class="stat score-na">
+      <div class="label">AI Act UE</div>
+      <div class="value">N/A — Pas d'IA dans le site</div>
+    </div>
+    <div class="stat score-critical">
+      <div class="label">nLPD Suisse</div>
+      <div class="value">43 % 🔴</div>
+    </div>
+  </div>
+
+  <div class="summary-grid">
+    <div class="stat" style="border-left: 4px solid var(--red);">
+      <div class="label">Critiques 🔴</div>
+      <div class="value" style="color: var(--red);">4</div>
+    </div>
+    <div class="stat" style="border-left: 4px solid var(--orange);">
+      <div class="label">Majeurs 🟠</div>
+      <div class="value" style="color: var(--orange);">9</div>
+    </div>
+    <div class="stat" style="border-left: 4px solid var(--yellow);">
+      <div class="label">Mineurs 🟡</div>
+      <div class="value" style="color: #92400E;">9</div>
+    </div>
+    <div class="stat" style="border-left: 4px solid var(--accent);">
+      <div class="label">À vérifier 🔍</div>
+      <div class="value" style="color: var(--accent);">9</div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <strong>Verdict :</strong> Bonne base (politique de confidentialité existante, hébergement souverain France, pas de tracking),
+    mais <strong>non-conformité critique</strong> sur deux axes :
+    <ol>
+      <li><strong>Transferts internationaux</strong> : Calendly (US) utilisé partout sans mention dans la politique de confidentialité ni garanties documentées (Schrems II / Swiss-US DPF).</li>
+      <li><strong>Volet suisse</strong> : aucune mention de la nLPD/PFPDT alors que tu as demandé l'audit pour la Suisse — la politique actuelle ne couvre que le RGPD.</li>
+    </ol>
+    Le site <strong>n'utilise pas d'IA embarquée</strong>, donc l'AI Act ne s'applique pas au site lui-même.
+    Il s'appliquerait aux <strong>services vendus</strong> (audit IA, consulting, SaaS clients) — hors périmètre de cet audit.
+  </div>
+
+  <h2>🎯 Top 5 — Findings critiques</h2>
+
+  <div class="finding critical">
+    <span class="finding-id">C-01</span><strong>Transferts US (Calendly) non documentés</strong>
+    <p>Calendly LLC (US) utilisé sur 4+ emplacements (Hero, CTA, Footer, Contact, email confirmation). Aucune mention dans la politique de confidentialité ni de garantie EU-US DPF / Swiss-US DPF référencée.</p>
+    <p><strong>Réf :</strong> RGPD Art. 13(1)(f), 44-49 ; nLPD Art. 19(2)(d-e), 16-18</p>
+  </div>
+
+  <div class="finding critical">
+    <span class="finding-id">C-02</span><strong>Volet suisse totalement absent</strong>
+    <p>La politique ne mentionne que le RGPD et la CNIL. Aucune référence à la nLPD, au PFPDT, ni au portail DataReg suisse pour notification de violation.</p>
+    <p><strong>Réf :</strong> nLPD Art. 19, 16-18, 24</p>
+  </div>
+
+  <div class="finding critical">
+    <span class="finding-id">C-03</span><strong>Vulnérabilité TLS dans le formulaire de contact</strong>
+    <p><code>aibizshift/src/app/api/contact/route.ts:53-55</code> contient <code>tls: { rejectUnauthorized: false }</code> — désactive la vérification du certificat SMTP, exposition à attaque MITM sur emails contenant les PII des contacts.</p>
+    <p><strong>Action :</strong> Supprimer ces lignes (Brevo a un certificat valide).</p>
+    <p><strong>Réf :</strong> RGPD Art. 32 ; nLPD Art. 8</p>
+  </div>
+
+  <div class="finding critical">
+    <span class="finding-id">C-04</span><strong>SIRET manquant dans les mentions légales</strong>
+    <p><code>mentions-legales/page.tsx:40</code> : <code>SIRET : [à compléter]</code> — placeholder visible en production.</p>
+    <p><strong>Réf :</strong> LCEN Art. 6-III, Code de commerce Art. R123-237</p>
+  </div>
+
+  <h2>🟠 Findings majeurs (9)</h2>
+
+  <div class="finding major"><span class="finding-id">M-01</span><strong>Pas de rate limiting sur /api/contact</strong> — Honeypot insuffisant contre attaque distribuée. RGPD Art. 32(1)(b).</div>
+  <div class="finding major"><span class="finding-id">M-02</span><strong>Conservation 24 mois non automatisée</strong> — Annoncée mais aucun mécanisme de purge. RGPD Art. 5(1)(e), 17.</div>
+  <div class="finding major"><span class="finding-id">M-03</span><strong>Sous-traitants non listés exhaustivement</strong> — Calendly absent, fal.ai absent. RGPD Art. 13(1)(e).</div>
+  <div class="finding major"><span class="finding-id">M-04</span><strong>Aucun ROPA (registre des traitements)</strong> — RGPD Art. 30, nLPD Art. 12.</div>
+  <div class="finding major"><span class="finding-id">M-05</span><strong>Pas de procédure d'incident / notification violation</strong> — RGPD Art. 33-34, nLPD Art. 24.</div>
+  <div class="finding major"><span class="finding-id">M-06</span><strong>Consentement non persisté en base</strong> — Charge de la preuve impossible. RGPD Art. 7(1).</div>
+  <div class="finding major"><span class="finding-id">M-07</span><strong>Cookies techniques non détaillés</strong> — payload-token et theme-preference non listés. ePrivacy Art. 5(3).</div>
+  <div class="finding major"><span class="finding-id">M-08</span><strong>Pas de DPA signé documenté</strong> — Brevo, Calendly, hébergeur. RGPD Art. 28(3).</div>
+  <div class="finding major"><span class="finding-id">M-09</span><strong>Mention "Scaleway" à vérifier</strong> — CLAUDE.md mentionne "serveur souverain" sans préciser. RGPD Art. 13(1)(e).</div>
+
+  <h2>🟡 Findings mineurs (9)</h2>
+
+  <div class="finding minor"><span class="finding-id">m-01</span> Date "avril 2026" sans jour précis (préciser 17 avril 2026).</div>
+  <div class="finding minor"><span class="finding-id">m-02</span> Pas de CGV/CGS pour les services vendus (hors site mais lié au business).</div>
+  <div class="finding minor"><span class="finding-id">m-03</span> <code>console.error</code> peut logger des PII dans les logs Coolify.</div>
+  <div class="finding minor"><span class="finding-id">m-04</span> Pas de mention de littératie IA Art. 4 AI Act (anticiper embauche).</div>
+  <div class="finding minor"><span class="finding-id">m-05</span> Hashage Payload PBKDF2 (Argon2id préférable, non critique solo).</div>
+  <div class="finding minor"><span class="finding-id">m-06</span> Pas de tests de sécurité réguliers (recommandation OWASP ZAP annuel).</div>
+  <div class="finding minor"><span class="finding-id">m-07</span> Lien Calendly dans email de confirmation sans pré-info transfert US.</div>
+  <div class="finding minor"><span class="finding-id">m-08</span> Pas de section "Mineurs" même si N/A (clarification Art. 8 RGPD).</div>
+  <div class="finding minor"><span class="finding-id">m-09</span> Vérifier liens "Mentions légales" / "Confidentialité" sur toutes les pages.</div>
+
+  <h2>📅 Plan de remédiation</h2>
+
+  <table>
+    <thead>
+      <tr><th>Priorité</th><th>#</th><th>Action</th><th>Effort</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>🔴</td><td>C-01</td><td>Section "Transferts internationaux (USA)" + EU-US DPF / Swiss-US DPF Calendly</td><td>30 min</td></tr>
+      <tr><td>🔴</td><td>C-02</td><td>Étendre confidentialité avec section nLPD/PFPDT/DataReg</td><td>30 min</td></tr>
+      <tr><td>🔴</td><td>C-03</td><td>Supprimer <code>tls.rejectUnauthorized: false</code></td><td>5 min</td></tr>
+      <tr><td>🔴</td><td>C-04</td><td>Renseigner SIRET réel</td><td>5 min</td></tr>
+      <tr><td>🟠</td><td>M-01</td><td>Rate limit sur /api/contact</td><td>1 h</td></tr>
+      <tr><td>🟠</td><td>M-02</td><td>Job de purge automatique 24 mois</td><td>2 h</td></tr>
+      <tr><td>🟠</td><td>M-03</td><td>Tableau sous-traitants dans politique</td><td>30 min</td></tr>
+      <tr><td>🟠</td><td>M-04</td><td>Créer ROPA minimal</td><td>1 h</td></tr>
+      <tr><td>🟠</td><td>M-05</td><td>Runbook incident response</td><td>2 h</td></tr>
+      <tr><td>🟠</td><td>M-06</td><td>Persister consent en DB</td><td>2 h</td></tr>
+      <tr><td>🟠</td><td>M-07</td><td>Détailler cookies techniques</td><td>15 min</td></tr>
+      <tr><td>🟠</td><td>M-08</td><td>Récupérer et archiver DPA</td><td>1 h admin</td></tr>
+      <tr><td>🟠</td><td>M-09</td><td>Vérifier hébergeur réel et corriger pages</td><td>15 min</td></tr>
+    </tbody>
+  </table>
+
+  <h2>🇪🇺 vs 🇨🇭 — Divergences UE / Suisse</h2>
+
+  <table>
+    <thead>
+      <tr><th>Sujet</th><th>UE (RGPD)</th><th>Suisse (nLPD)</th><th>Impact AIBizShift</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Délai notification violation</strong></td>
+        <td>72h strict</td>
+        <td>"Dès que possible"</td>
+        <td>Procédure unique 72h (le plus strict)</td>
+      </tr>
+      <tr>
+        <td><strong>Sanctions</strong></td>
+        <td>Amendes admin jusqu'à 20M€ / 4% CA contre l'<em>organisation</em></td>
+        <td>Amendes pénales jusqu'à <strong>CHF 250'000 contre Guy personnellement</strong> (intentionnel)</td>
+        <td><strong>Risque personnel suisse à connaître</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Autorité plainte</strong></td>
+        <td>CNIL (FR)</td>
+        <td>PFPDT (CH)</td>
+        <td>Mentionner les deux</td>
+      </tr>
+      <tr>
+        <td><strong>Portail violation</strong></td>
+        <td>Téléservice CNIL</td>
+        <td>DataReg PFPDT</td>
+        <td>Connaître les deux URL</td>
+      </tr>
+      <tr>
+        <td><strong>Transferts US</strong></td>
+        <td>EU-US DPF</td>
+        <td>Swiss-US DPF (depuis 15 sept. 2024)</td>
+        <td><strong>Frameworks distincts</strong> — vérifier les 2 pour Calendly</td>
+      </tr>
+      <tr>
+        <td><strong>DPO</strong></td>
+        <td>Obligatoire dans certains cas</td>
+        <td>Volontaire (Art. 10)</td>
+        <td>Non obligatoire pour AIBizShift</td>
+      </tr>
+      <tr>
+        <td><strong>Représentant local</strong></td>
+        <td>Si responsable hors UE</td>
+        <td>Si responsable hors CH + grande échelle + risque élevé</td>
+        <td><strong>Probablement N/A</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>📚 Sources et références</h2>
+
+  <table>
+    <thead><tr><th>Cadre</th><th>Ressource</th><th>URL</th></tr></thead>
+    <tbody>
+      <tr><td>RGPD UE</td><td>Texte complet (EUR-Lex)</td><td><code>https://eur-lex.europa.eu/eli/reg/2016/679/oj</code></td></tr>
+      <tr><td>RGPD UE</td><td>CNIL — Notification violation</td><td><code>https://www.cnil.fr/fr/notifier-une-violation-de-donnees-personnelles</code></td></tr>
+      <tr><td>AI Act UE</td><td>Texte complet</td><td><code>https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32024R1689</code></td></tr>
+      <tr><td>nLPD Suisse</td><td>Loi fédérale FR</td><td><code>https://www.fedlex.admin.ch/eli/cc/2022/491/fr</code></td></tr>
+      <tr><td>nLPD Suisse</td><td>PFPDT</td><td><code>https://www.edoeb.admin.ch/edoeb/fr/home.html</code></td></tr>
+      <tr><td>nLPD Suisse</td><td>Portail DataReg (violations)</td><td><code>https://databreach.edoeb.admin.ch/</code></td></tr>
+      <tr><td>Transferts US</td><td>Data Privacy Framework (UE + CH)</td><td><code>https://www.dataprivacyframework.gov</code></td></tr>
+      <tr><td>Sous-traitants</td><td>Brevo DPA</td><td><code>https://www.brevo.com/legal/dpa/</code></td></tr>
+      <tr><td>Sous-traitants</td><td>Calendly DPA</td><td><code>https://calendly.com/dpa</code></td></tr>
+    </tbody>
+  </table>
+
+</div>
+
+<div class="footer">
+  Rapport généré par le skill <code>/compliance</code> v1 — 17 avril 2026<br>
+  Voir aussi : <code>COMPLIANCE_REPORT.md</code> pour les détails complets
+</div>
+
+</body>
+</html>

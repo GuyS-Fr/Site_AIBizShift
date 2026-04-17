@@ -229,7 +229,7 @@ Paragraphe (text-lg text-blue-100 leading-relaxed mt-6) :
 "En 15 minutes, mon outil d'analyse IA génère un rapport complet sur votre présence digitale : SEO, conversion, copywriting, positionnement concurrentiel. Vous recevez la synthèse avec des recommandations actionnables — gratuitement, sans engagement."
 
 Bouton CTA (inline-block mt-8) :
-"Demander mon audit gratuit →" → href="https://calendly.com/guy-salvatore/30min" target="_blank" rel="noopener noreferrer"
+"Demander mon audit gratuit →" → Next.js `<Link>` href="/contact" (navigation interne vers le formulaire Contact, pas de target="_blank")
 Style : bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-10 py-5 rounded-xl text-lg transition-all shadow-lg hover:shadow-xl
 
 3 badges sous le bouton (flex flex-wrap gap-6 mt-6 text-sm text-blue-200) :

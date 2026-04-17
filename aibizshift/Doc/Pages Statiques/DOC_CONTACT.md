@@ -4,7 +4,10 @@
 
 - `src/app/(frontend)/contact/page.tsx` — Page (Server Component)
 - `src/components/ContactForm.tsx` — Formulaire (Client Component "use client")
-- `src/app/api/contact/route.ts` — API route envoi email
+- `src/app/api/contact/route.ts` — API route envoi email + persistance DB
+- `src/utilities/rateLimit.ts` — Rate limiter en memoire
+- `src/collections/ContactSubmissions/index.ts` — Collection Payload (persistance + consent)
+- `src/jobs/purgeOldSubmissions.ts` — Task Payload de purge auto 24 mois
 
 ## Route
 
@@ -56,9 +59,10 @@
 - Consentement RGPD coche
 - Erreurs affichees sous chaque champ
 
-### Anti-spam
+### Anti-spam (defense en profondeur)
 
-Champ honeypot cache "website" — si rempli, l'API retourne succes sans envoyer d'email.
+1. **Honeypot** : champ cache `website` — si rempli, l'API retourne succes sans rien faire
+2. **Rate limit** : 5 requetes max/IP/heure (cf. section API)
 
 ## API Route (`/api/contact`)
 
@@ -66,25 +70,37 @@ Champ honeypot cache "website" — si rempli, l'API retourne succes sans envoyer
 
 POST avec body JSON contenant tous les champs du formulaire.
 
-### Traitement
+### Pipeline de traitement
 
-1. Verification honeypot
-2. Validation serveur (champs requis, format email)
-3. Sanitization HTML (escapeHtml) pour prevenir XSS dans les emails
-4. Envoi de 2 emails via nodemailer :
+1. **Rate limit** : verification 5 req/IP/h via `rateLimit()`. Si depasse → 429 + `Retry-After`
+2. **Honeypot** : verification champ `website`
+3. **Validation serveur** (champs requis, format email)
+4. **Sanitization HTML** (escapeHtml) pour prevenir XSS dans les emails
+5. **Persistance DB** (collection `contact-submissions`) avec consentement + horodatage + IP pseudonymisee SHA-256
+6. **Envoi de 2 emails** via nodemailer :
    - **Email notification** vers SMTP_FROM : tableau HTML avec toutes les donnees, reply-to visiteur
-   - **Email confirmation** au visiteur : message de remerciement + lien Calendly
+   - **Email confirmation** au visiteur : remerciement + lien Calendly + mention transfert US
+
+### Headers de reponse
+
+| Header | Valeur |
+|--------|--------|
+| `X-RateLimit-Limit` | 5 |
+| `X-RateLimit-Remaining` | nombre restant |
+| `X-RateLimit-Reset` | timestamp Unix de reset |
+| `Retry-After` (si 429) | secondes avant retry |
 
 ### Variables d'environnement (Coolify, runtime)
 
 | Variable | Description |
 |----------|-------------|
-| `SMTP_HOST` | Serveur SMTP |
-| `SMTP_PORT` | Port (587 recommande pour TLS, 465 pour SSL) |
+| `SMTP_HOST` | Serveur SMTP (smtp-relay.brevo.com) |
+| `SMTP_PORT` | Port (587 STARTTLS recommande) |
 | `SMTP_SECURE` | `true` (SSL, port 465) ou `false` (STARTTLS, port 587). Si absent, auto-detecte selon le port |
 | `SMTP_USER` | Adresse email d'authentification |
 | `SMTP_PASS` | Mot de passe SMTP |
 | `SMTP_FROM` | Adresse d'expedition et de reception |
+| `PAYLOAD_SECRET` | Utilise comme sel pour le hash IP (pseudonymisation) |
 
 ### Configuration SMTP — Brevo (recommande)
 
@@ -103,6 +119,56 @@ Important : verifier le domaine `aibizshift.eu` dans Brevo (Settings → Senders
 pour eviter que les emails partent en spam.
 
 Le webmail OVH Zimbra reste sur `https://zimbra1.mail.ovh.net/` pour la reception.
+
+> **Securite** : `tls.rejectUnauthorized: false` a ete supprime le 2026-04-17 (vestige du contournement OVH Zimbra qui n'a plus lieu d'etre — Brevo a un certificat valide). Audit M-C03 resolu.
+
+## Collection Payload `contact-submissions`
+
+| Champ | Type | Notes |
+|-------|------|-------|
+| `name` | text | Requis |
+| `email` | email | Requis, indexe |
+| `phone` | text | Optionnel |
+| `company` | text | Optionnel |
+| `subject` | text | Requis |
+| `message` | textarea | Requis |
+| `consent.given` | checkbox | Requis (preuve consentement) |
+| `consent.givenAt` | date+heure | Horodatage du consentement |
+| `consent.ipHash` | text readOnly | SHA-256(`PAYLOAD_SECRET` + IP) tronque 16 chars — pseudonymisation Art. 32 RGPD |
+| `createdAt` / `updatedAt` | timestamps | Automatiques |
+
+### Acces (ACL Payload)
+
+| Operation | Regle |
+|-----------|-------|
+| `create` | Ouvert (API publique uniquement) |
+| `read` / `update` / `delete` | Authentifie (admin Payload uniquement) |
+| `admin` | Authentifie |
+
+### Visibilite admin
+
+Visible dans `/admin` sous "Demandes de contact". Colonnes affichees : Nom, Email, Sujet, Date.
+
+## Job de purge automatique
+
+`src/jobs/purgeOldSubmissions.ts` — Task Payload `purgeOldSubmissions`
+
+- **Action** : supprime les soumissions `createdAt < now - 24 mois` (max 1000 par run)
+- **Retries** : 2
+- **Output** : `{ deleted: number, cutoff: ISO string }`
+
+### Declenchement
+
+A configurer dans **Coolify** comme cron quotidien :
+
+```bash
+curl -X POST https://aibizshift.eu/api/payload-jobs/run \
+  -H "Authorization: Bearer $CRON_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"queue": "default"}'
+```
+
+> Le `CRON_SECRET` est deja configure dans les variables Coolify.
 
 ## Colonne droite — Informations
 
@@ -134,5 +200,17 @@ og:locale: fr_FR
 
 - Le formulaire est un Client Component importe dans la page Server Component
 - L'ancienne page contact CMS (via `[slug]`) est remplacee par cette page statique
-- L'API route est independante de Payload — elle utilise nodemailer directement
+- L'API route est independante de Payload pour l'envoi d'email — elle utilise nodemailer directement
+- L'API route utilise `getPayload({ config })` pour la persistance en DB
 - Le transport SMTP Payload (`@payloadcms/email-nodemailer` dans payload.config.ts) est separe
+- Les erreurs SMTP/DB sont loggees sans PII (`name [code]` uniquement) — Art. 32 RGPD
+
+## Historique des modifications
+
+- 2026-04-17 : Hardening compliance post-audit
+  - Rate limit 5/h/IP ajoute (M-01)
+  - Persistance DB consent + IP pseudonymisee (M-06)
+  - Job de purge auto 24 mois (M-02)
+  - Suppression `tls.rejectUnauthorized: false` (C-03)
+  - Logs `console.error` masques (m-03)
+  - Note transfert US Calendly dans email confirmation (m-07)

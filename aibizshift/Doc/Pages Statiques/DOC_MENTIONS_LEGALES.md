@@ -17,8 +17,8 @@
 
 ## Rubriques
 
-1. Editeur du site — Guy Salvatore, EI Smarthome Smartelec, APE 6201Z
-2. Hebergement — Scaleway SAS, Paris, serveurs en France
+1. Editeur du site — Guy Salvatore, EI Smarthome Smartelec, APE 6201Z, SIRET renseigne
+2. Hebergement — **OVH SAS**, Roubaix, serveurs en France
 3. Propriete intellectuelle
 4. Liens hypertextes
 5. Limitation de responsabilite
@@ -29,10 +29,11 @@
 
 - **Entreprise :** Smarthome Smartelec (EI)
 - **Nom commercial :** AIBizShift
-- **SIRET :** [a completer]
+- **SIRET :** 833 914 989 00029
 - **Code APE :** 6201Z
 - **Directeur de publication :** Guy Salvatore
 - **Email :** contact@aibizshift.eu
+- **Hebergeur :** OVH SAS, 2 rue Kellermann, 59100 Roubaix, France
 
 ## SEO
 
@@ -45,4 +46,8 @@ description: Mentions legales du site aibizshift.eu — Guy Salvatore, consultan
 
 - Server Component (pas de "use client")
 - Pas d'images, pas de cards — texte structure uniquement
-- Derniere mise a jour affichee : avril 2026
+- Derniere mise a jour affichee : 17 avril 2026
+
+## Historique des modifications
+
+- 2026-04-17 : SIRET reel renseigne (etait `[a completer]`). Hebergeur corrige : Scaleway → **OVH SAS** (correction post-audit compliance, finding M-09).

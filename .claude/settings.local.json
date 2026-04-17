@@ -14,7 +14,8 @@
       "Skill(pushme)",
       "Bash(grep -E \"\\\\.\\(ts|tsx\\)$\")",
       "Bash(find \"C:\\\\DevClaude\\\\Site_AIBizShift\\\\aibizshift\\\\src\\\\app\" -name \"*.tsx\" -exec grep -l \"heroImage\\\\|Resource.*Media\\\\|url.*media\" {} \\\\;)",
-      "Bash(xargs kill:*)"
+      "Bash(xargs kill:*)",
+      "Bash(pnpm generate:types)"
     ]
   }
 }

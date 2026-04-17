@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'AIBizShift — Consultant IA & Automatisation pour PME | Valence, Drôme',
@@ -426,14 +427,12 @@ export default function HomePage() {
                 concurrentiel. Vous recevez la synthèse avec des recommandations actionnables —
                 gratuitement, sans engagement.
               </p>
-              <a
-                href={CALENDLY_URL}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/contact"
                 className="inline-block mt-8 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold px-10 py-5 rounded-xl text-lg transition-all shadow-lg hover:shadow-xl"
               >
                 Demander mon audit gratuit &rarr;
-              </a>
+              </Link>
               <div className="flex flex-wrap gap-6 mt-6 text-sm text-blue-200">
                 <span>&#10003; Gratuit</span>
                 <span>&#10003; Sans engagement</span>

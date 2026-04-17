@@ -37,7 +37,7 @@ export default function MentionsLegalesPage() {
               contact@aibizshift.eu
             </a>
             <br />
-            SIRET&nbsp;: [&agrave; compl&eacute;ter]
+            SIRET&nbsp;: 833 914 989 00029
             <br />
             Code APE&nbsp;: 6201Z &mdash; Programmation informatique
           </p>
@@ -46,19 +46,19 @@ export default function MentionsLegalesPage() {
           <h2 className="text-xl font-semibold text-slate-800 mt-10 mb-4">2. H&eacute;bergement</h2>
           <p>Le site est h&eacute;berg&eacute; par&nbsp;:</p>
           <p className="mt-4">
-            <strong>Scaleway SAS</strong>
+            <strong>OVH SAS</strong>
             <br />
-            8 rue de la Ville l&apos;&Eacute;v&ecirc;que
+            2 rue Kellermann
             <br />
-            75008 Paris, France
+            59100 Roubaix, France
             <br />
             <a
-              href="https://www.scaleway.com"
+              href="https://www.ovhcloud.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:underline"
             >
-              www.scaleway.com
+              www.ovhcloud.com
             </a>
           </p>
           <p className="mt-4">
@@ -120,7 +120,7 @@ export default function MentionsLegalesPage() {
           </p>
 
           <p className="mt-10 text-sm text-slate-500">
-            Derni&egrave;re mise &agrave; jour&nbsp;: avril 2026
+            Derni&egrave;re mise &agrave; jour&nbsp;: 17 avril 2026
           </p>
         </div>
       </section>

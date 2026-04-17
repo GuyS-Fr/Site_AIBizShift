@@ -51,13 +51,14 @@ src/
       a-propos/         # Page A propos (statique, parcours + differenciateurs)
       portfolio/        # Page Portfolio (statique, 4 projets)
       mentions-legales/ # Mentions legales (statique)
-      confidentialite/  # Politique de confidentialite (statique)
+      confidentialite/  # Politique de confidentialite (statique, RGPD + nLPD)
       posts/            # Blog (via Payload CMS)
       search/           # Recherche
       [slug]/           # Pages dynamiques CMS (contact, etc.)
     (payload)/          # Admin Payload + routes API
+    api/contact/        # API route formulaire (rate limit + persistance DB)
   blocks/               # Blocs de contenu pour le layout builder
-  collections/          # Definitions des collections Payload (Users, Posts, Pages)
+  collections/          # Definitions des collections Payload (Users, Posts, Pages, ContactSubmissions)
   components/           # Composants React reutilisables
     ui/                 # Composants UI (style Shadcn)
     Logo/               # Logo AIBizShift (texte stylise, pas d'image)
@@ -69,9 +70,10 @@ src/
   endpoints/            # Endpoints API personnalises
   hooks/                # Hooks React personnalises
   access/               # Logique de controle d'acces
+  jobs/                 # Tasks Payload (purge auto, etc.)
   plugins/              # Plugins Payload personnalises
   providers/            # Contextes React (Theme, HeaderTheme)
-  utilities/            # Fonctions utilitaires
+  utilities/            # Fonctions utilitaires (rateLimit, getURL, etc.)
   payload.config.ts     # Configuration principale Payload
   payload-types.ts      # Types auto-generes (ne pas modifier manuellement)
 ```
@@ -91,6 +93,7 @@ src/
   - `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `SMTP_FROM` (runtime, Brevo pour le formulaire contact)
 - **Email:** SMTP via Brevo (smtp-relay.brevo.com:587) — OVH Zimbra SMTP incompatible avec nodemailer
 - **Stockage persistant:** Volume Mount `aibizshift-media` → `/app/public/media` (requis pour que les fichiers media survivent aux redeploiements)
+- **Cron Coolify (compliance):** un cron quotidien doit appeler `POST /api/payload-jobs/run` avec `Authorization: Bearer $CRON_SECRET` et body `{"queue":"default"}` pour declencher la task `purgeOldSubmissions` (purge auto des contact-submissions > 24 mois — RGPD Art. 5(1)(e))
 - **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
 
 ## Pages statiques
@@ -104,7 +107,7 @@ Les specs de design sont dans `Doc/Pages Statiques/`.
 - **A propos** (`a-propos/page.tsx`) — Parcours, differenciateurs, chiffres cles, formation, CTA
 - **Portfolio** (`portfolio/page.tsx`) — 4 projets (OnPulse, AIBizShift, n8n, Audit) avec badges tech
 - **Mentions legales** (`mentions-legales/page.tsx`) — Editeur, hebergement, propriete intellectuelle
-- **Confidentialite** (`confidentialite/page.tsx`) — RGPD, donnees collectees, droits, cookies
+- **Confidentialite** (`confidentialite/page.tsx`) — RGPD UE + nLPD Suisse : sous-traitants, transferts US (Calendly EU-US/Swiss-US DPF), droits, cookies, mineurs, securite
 
 ## Images statiques
 
@@ -139,11 +142,20 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 |---------|-------------|
 | `DOC_HOMEPAGE.md` | Doc technique de la homepage (sections, images, liens, SEO) |
 | `DOC_SERVICES.md` | Doc technique de la page services (offres, tarifs, processus) |
-| `DOC_CONTACT.md` | Doc technique de la page contact (formulaire, API, emails) |
+| `DOC_CONTACT.md` | Doc technique de la page contact (formulaire, API, rate limit, persistance, emails) |
 | `DOC_A_PROPOS.md` | Doc technique de la page a propos (parcours, chiffres, formation) |
 | `DOC_PORTFOLIO.md` | Doc technique de la page portfolio (4 projets, badges tech) |
-| `DOC_MENTIONS_LEGALES.md` | Doc technique des mentions legales |
-| `DOC_CONFIDENTIALITE.md` | Doc technique de la politique de confidentialite (RGPD) |
+| `DOC_MENTIONS_LEGALES.md` | Doc technique des mentions legales (SIRET, hebergeur OVH) |
+| `DOC_CONFIDENTIALITE.md` | Doc technique de la politique de confidentialite (RGPD UE + nLPD Suisse) |
+
+Documentation compliance dans `Doc/COMPLIANCE/` :
+
+| Fichier | Description |
+|---------|-------------|
+| `ROPA.md` | Registre des activites de traitement (Art. 30 RGPD / Art. 12 nLPD) |
+| `INCIDENT_RESPONSE.md` | Procedure 72h notification violation (Art. 33-34 RGPD / Art. 24 nLPD) |
+
+Rapport d'audit a la racine du repo : `COMPLIANCE_REPORT.md` + `COMPLIANCE_REPORT.html`.
 | `PROMPT_CLAUDE_CODE_CONTACT.md` | Spec de design page contact |
 | `PROMPT_CLAUDE_CODE_HOMEPAGE_V3.md` | Spec de design homepage (version courante) |
 | `PROMPT_CLAUDE_CODE_SERVICES.md` | Spec de design page services |
@@ -162,6 +174,46 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 - **Upload media EACCES en prod:** Le volume mount cree le dossier en root. L'entrypoint fixe les permissions avant de lancer l'app via su-exec en tant que nextjs
 - **SMTP OVH Zimbra inaccessible:** zimbra1.mail.ovh.net ferme les connexions TLS, ssl0.ovh.net rejette les identifiants Zimbra. Solution : utiliser Brevo (smtp-relay.brevo.com:587)
 - **Images blog non affichees (cards "No image" + media blocks casses):** Les cards utilisaient `meta.image` (SEO) au lieu de `heroImage`. Fix : fallback `heroImage` dans Card + ajout `/media/**` aux `localPatterns` de next.config.ts
+- **Vulnerabilite TLS dans /api/contact (audit 2026-04-17):** `tls.rejectUnauthorized: false` etait un vestige du contournement OVH Zimbra qui n'a plus lieu d'etre. Supprime — Brevo a un certificat valide
+
+## Compliance RGPD / nLPD
+
+### Collection `contact-submissions` (persistance consent)
+
+Toute soumission du formulaire `/contact` est persistee en DB via la collection `ContactSubmissions`
+(`src/collections/ContactSubmissions/index.ts`). Champs stockes : nom, email, telephone, entreprise,
+sujet, message, et un groupe `consent` contenant :
+- `given` (boolean, requis) — preuve consentement RGPD Art. 7(1)
+- `givenAt` (date+heure) — horodatage du consentement
+- `ipHash` (text readOnly) — SHA-256(`PAYLOAD_SECRET` + IP) tronque 16 chars (pseudonymisation Art. 32)
+
+Acces : `create` ouvert (API publique), `read/update/delete` admin authentifie uniquement.
+Visible dans `/admin` sous "Demandes de contact".
+
+### Rate limit (`src/utilities/rateLimit.ts`)
+
+Limiteur en memoire (Map) par IP, configure a 5 requetes / heure / IP sur `/api/contact`.
+Returns 429 + headers `X-RateLimit-*` + `Retry-After`. Cleanup auto toutes les 5 min.
+
+### Job de purge auto 24 mois (`src/jobs/purgeOldSubmissions.ts`)
+
+Task Payload `purgeOldSubmissions` qui supprime les `contact-submissions` `createdAt < now - 24 mois`
+(max 1000 par run, 2 retries). A declencher via cron Coolify quotidien (cf. section Deploiement).
+
+### Documentation compliance
+
+- `Doc/COMPLIANCE/ROPA.md` — Registre des traitements (4 traitements documentes)
+- `Doc/COMPLIANCE/INCIDENT_RESPONSE.md` — Procedure 72h notification violation
+- `COMPLIANCE_REPORT.md` (racine repo) — Audit complet RGPD + AI Act + nLPD
+
+### Sous-traitants documentes
+
+| Sous-traitant | Role | Localisation | Garantie transfert |
+|---------------|------|--------------|---------------------|
+| OVH SAS | Hebergement | 🇫🇷 France (Roubaix) | RGPD natif UE |
+| Brevo (Sendinblue) | SMTP | 🇫🇷 France (Paris) | RGPD natif UE |
+| Calendly LLC | RDV (lien externe) | 🇺🇸 USA | EU-US DPF + Swiss-US DPF |
+| fal.ai | Generation images du site | 🇺🇸 USA | Pas de PII utilisateur traitee |
 
 ## Regles de securite critiques (Payload CMS)
 

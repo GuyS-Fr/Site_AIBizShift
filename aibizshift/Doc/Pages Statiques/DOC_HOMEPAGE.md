@@ -16,7 +16,7 @@
 | 2 | Probleme / Solution | `#FAFAFA` | 2 colonnes texte + image `before-after.png` |
 | 3 | Services | blanc | 4 cards avec images (consulting, website, formation, SaaS) |
 | 4 | Credibilite | `#0F172A` | 3 cards (expertise, builder, souverainete) avec icones SVG |
-| 5 | CTA Audit | gradient bleu `#1E40AF` → `#3B82F6` | Titre, description audit complet, CTA Calendly, image mockup |
+| 5 | CTA Audit | gradient bleu `#1E40AF` → `#3B82F6` | Titre, description audit complet, CTA `/contact`, image mockup |
 | 6 | Footer | `#0F172A` | 4 colonnes : marque, navigation, services, contact |
 
 ## Images utilisees
@@ -35,10 +35,20 @@ Toutes dans `public/images/` :
 ## Liens externes
 
 - **Calendly** : `https://calendly.com/guy-salvatore/30min` (target="_blank")
+  - Utilise par le **Hero principal** (CTA "Reserver mon audit gratuit")
+  - Utilise par le **mini-CTA du footer custom** ("Audit gratuit →")
 - **LinkedIn** : `https://www.linkedin.com/in/guy-salvatore/` (target="_blank")
 - **Malt** : `https://www.malt.fr/profile/guysalvatore` (target="_blank")
 
-## Liens internes (footer de la homepage)
+## Liens internes
+
+### CTA dans le corps de la page
+
+| Lien | Section | Destination | Statut |
+|------|---------|-------------|--------|
+| Demander mon audit gratuit | Section 5 — CTA Audit (gradient bleu) | `/contact` | Actif (Next.js `<Link>`) |
+
+### Footer de la homepage
 
 | Lien | Destination | Statut |
 |------|-------------|--------|
@@ -81,3 +91,4 @@ Pour modifier : Payload Admin → Globals → Header.
 - La section hero utilise `fill` + `object-cover` pour le background
 - "Guy Music" corrige en "Guy Salvatore" le 2026-04-08
 - "Voir tous nos services" pointe vers `/services` (pas `#services`)
+- 2026-04-17 : le CTA "Demander mon audit gratuit" (section 5) pointe vers `/contact` (formulaire) au lieu de Calendly. Les CTA Hero principal et footer mini-CTA restent sur Calendly (RDV direct).
