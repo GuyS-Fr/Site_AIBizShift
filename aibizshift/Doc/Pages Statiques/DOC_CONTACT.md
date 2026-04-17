@@ -205,6 +205,18 @@ og:locale: fr_FR
 - Le transport SMTP Payload (`@payloadcms/email-nodemailer` dans payload.config.ts) est separe
 - Les erreurs SMTP/DB sont loggees sans PII (`name [code]` uniquement) — Art. 32 RGPD
 
+## Conformite RGPD / nLPD
+
+L'option "Audit gratuit de mon site web" du selecteur de sujet declenche un service
+qui utilise des outils IA (LLM) cote backoffice. Voir la politique d'usage IA :
+[`Doc/COMPLIANCE/AI_USE_POLICY.md`](../../Doc/COMPLIANCE/AI_USE_POLICY.md) — section 3.3
+"Services vendus aux clients".
+
+Les demandes recues via ce formulaire sont tracees dans la collection Payload
+`contact-submissions` (voir section "Collection Payload" ci-dessus). Pour repondre
+aux demandes d'exercice de droits RGPD/nLPD, utiliser les templates dans
+[`Doc/COMPLIANCE/templates/data-subject-request-response.md`](../../Doc/COMPLIANCE/templates/data-subject-request-response.md).
+
 ## Historique des modifications
 
 - 2026-04-17 : Hardening compliance post-audit
@@ -214,3 +226,4 @@ og:locale: fr_FR
   - Suppression `tls.rejectUnauthorized: false` (C-03)
   - Logs `console.error` masques (m-03)
   - Note transfert US Calendly dans email confirmation (m-07)
+  - Templates DSR + AI_USE_POLICY references depuis cette doc

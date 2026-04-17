@@ -74,6 +74,17 @@ description: Politique de confidentialite et protection des donnees personnelles
 - Hebergeur : **OVH** (corrige depuis Scaleway le 2026-04-17)
 - Derniere mise a jour affichee : 17 avril 2026
 
+## Procedure interne d'exercice des droits
+
+Quand un visiteur exerce un droit (acces, rectification, effacement, portabilite, opposition,
+retrait consentement) via `contact@aibizshift.eu`, suivre la procedure et utiliser les
+templates definis dans :
+[`Doc/COMPLIANCE/templates/data-subject-request-response.md`](../../Doc/COMPLIANCE/templates/data-subject-request-response.md)
+
+Delai legal de reponse : **30 jours** (extensible 2 mois si complexite documentee).
+
+Action technique : recherche dans Payload Admin → "Demandes de contact" filtree par email.
+
 ## Historique des modifications
 
 - 2026-04-17 : Refonte majeure post-audit compliance (RGPD + AI Act + nLPD). Ajouts :

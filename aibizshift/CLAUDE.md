@@ -148,10 +148,11 @@ Toute la documentation est dans `Doc/Pages Statiques/` :
 | `DOC_MENTIONS_LEGALES.md` | Doc technique des mentions legales (SIRET, hebergeur OVH) |
 | `DOC_CONFIDENTIALITE.md` | Doc technique de la politique de confidentialite (RGPD UE + nLPD Suisse) |
 
-Documentation compliance dans `Doc/COMPLIANCE/` :
+Documentation compliance dans `Doc/COMPLIANCE/` (voir `Doc/COMPLIANCE/README.md` pour l'index) :
 
 | Fichier | Description |
 |---------|-------------|
+| `README.md` | Index compliance + statut des actions + liens autorites |
 | `ROPA.md` | Registre des activites de traitement (Art. 30 RGPD / Art. 12 nLPD) |
 | `INCIDENT_RESPONSE.md` | Procedure 72h notification violation (Art. 33-34 RGPD / Art. 24 nLPD) |
 | `TIA_CALENDLY.md` | Transfer Impact Assessment Calendly (EDPB Schrems II) |
