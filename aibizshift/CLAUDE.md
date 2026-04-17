@@ -96,6 +96,7 @@ src/
 - **Migrations Payload:** Auto-appliquees au demarrage via `prodMigrations` (`@payloadcms/db-postgres` declenche `migrate()` quand `NODE_ENV=production` + `prodMigrations` est defini). Desactive pendant `next build` via `NEXT_PHASE === 'phase-production-build'` pour eviter de migrer au build time. En dev : `pnpm payload migrate` manuel (push mode desactive avec `push: false`)
 - **Cron Coolify (compliance):** un cron quotidien doit appeler `POST /api/payload-jobs/run` avec `Authorization: Bearer $CRON_SECRET` et body `{"queue":"default"}` pour declencher la task `purgeOldSubmissions` (purge auto des contact-submissions > 24 mois — RGPD Art. 5(1)(e))
 - **TODO:** Configurer webhook GitHub → Coolify pour deploiement automatique sur push
+- **CI GitHub Actions :** `.github/workflows/security-audit.yml` — execute `pnpm audit --audit-level high` sur PR (si `package.json`/`pnpm-lock.yaml` change), push `main`, cron hebdomadaire (lundi 08h UTC) et manuel. Fail la pipeline si nouvelle vuln high/critical.
 
 ## Pages statiques
 
@@ -213,6 +214,7 @@ pnpm payload migrate                # applique (local)
 - **Images blog non affichees (cards "No image" + media blocks casses):** Les cards utilisaient `meta.image` (SEO) au lieu de `heroImage`. Fix : fallback `heroImage` dans Card + ajout `/media/**` aux `localPatterns` de next.config.ts
 - **Vulnerabilite TLS dans /api/contact (audit 2026-04-17):** `tls.rejectUnauthorized: false` etait un vestige du contournement OVH Zimbra qui n'a plus lieu d'etre. Supprime — Brevo a un certificat valide
 - **/admin KO `column payload_locked_documents__rels.contact_submissions_id does not exist` (2026-04-17):** La collection `ContactSubmissions` avait ete ajoutee en code mais jamais migree en DB (push mode s'etait arrete avant). Fix : ajout du systeme de migrations Payload (`src/migrations/`) + migration delta idempotente (IF NOT EXISTS) + `prodMigrations` pour auto-apply en prod. Nettoyage du marqueur `batch=-1` (dev-push) via `scripts/clear-dev-migration-marker.ts`
+- **Vulnerabilites high detectees par pnpm audit (2026-04-17):** Next.js 16.2.1 (DoS Server Components, GHSA-q4gf-8mx6-v5v3) + drizzle-orm 0.44.7 (SQL injection via identifiants, GHSA-gpj5-g38j-94v9, pinne par Payload 3.81). Fix : `pnpm update next` vers 16.2.4 + `pnpm.overrides` pour forcer `drizzle-orm >=0.45.2`. Build valide, 0 high/critical restants.
 
 ## Compliance RGPD / nLPD
 

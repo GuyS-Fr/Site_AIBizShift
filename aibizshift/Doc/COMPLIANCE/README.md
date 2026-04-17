@@ -1,7 +1,7 @@
 # Documentation compliance — AIBizShift
 
 > Cadres reglementaires couverts : **RGPD** (UE 2016/679) + **AI Act** (UE 2024/1689) + **nLPD/FADP** (Suisse, SR 235.1)
-> **Score conformite** au 2026-04-17 : **90 %** 🟢 (voir `../../../COMPLIANCE_REPORT.md` a la racine du repo)
+> **Score conformite** au 2026-04-17 (re-audit UE) : **92 %** 🟢 — RGPD UE 90 %, AI Act UE 100 % (voir `../../../COMPLIANCE_REPORT.md`)
 > **Responsable** : Guy Salvatore — contact@aibizshift.eu
 
 ---
@@ -46,24 +46,30 @@ A creer au premier incident :
 
 ## 🚦 Statut des actions de remediation
 
-Au 2026-04-17 (post-audit "/compliance") :
+Au 2026-04-17 (re-audit UE `/compliance`) :
 
-### ✅ Resolu (15 fixes)
+### ✅ Resolu (19 fixes)
 
-Tous les findings critiques + majeurs en code/doc resolus. Voir `COMPLIANCE_REPORT.md`.
+Tous les findings critiques + majeurs en code/doc resolus + correctifs securite + CI. Voir `COMPLIANCE_REPORT.md`.
 
-### 🟠 En cours (3 actions admin)
+Ajouts depuis l'audit UE+Suisse du matin :
+- **M-03** : ✅ TIA_CALENDLY.md cree
+- **m-01** : ✅ Templates DSR crees (`templates/data-subject-request-response.md`)
+- **m-04** : ✅ AI_USE_POLICY.md cree (AI Act Art. 4 litteratie)
+- **n-01** : ✅ Script `clear-dev-migration-marker.ts` documente (en-tete warning one-shot)
+- **m-02 (CI)** : ✅ `.github/workflows/security-audit.yml` — `pnpm audit` automatise (PR + hebdo)
+- **Vulns high** : ✅ Next.js 16.2.4 + drizzle-orm override >=0.45.2 (GHSA-q4gf-8mx6-v5v3 + GHSA-gpj5-g38j-94v9 patches)
+
+### 🟠 En cours (2 actions admin)
 
 - **M-01** : Activer cron Coolify quotidien pour la task `purgeOldSubmissions` (5 min)
-- **M-02** : Telecharger les 3 DPA OVH/Brevo/Calendly dans `dpa-signed/` (30 min)
-- **M-03** : ✅ TIA_CALENDLY.md cree
+- **M-02** : Telecharger les DPA OVH/Brevo/Calendly/fal.ai dans `dpa-signed/` (30 min)
 
-### 🟡 Backlog (4 mineurs)
+### 🟡 Backlog (3 mineurs)
 
-- **m-02** : Pentest annuel OWASP ZAP
-- **m-03** : CGV/CGS pour services vendus
-- **m-04** : ✅ AI_USE_POLICY.md cree
-- **m-05** : Migration Argon2id (faible priorite solo)
+- **m-02 (pentest)** : Pentest annuel OWASP ZAP (complement au `pnpm audit` CI)
+- **m-03** : CGV/CGS pour services vendus (avec avocat)
+- **m-05** : Migration hashage Argon2id (faible priorite solo)
 
 ---
 
