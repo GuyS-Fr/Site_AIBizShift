@@ -27,7 +27,8 @@
       "mcp__chrome-devtools__list_pages",
       "mcp__chrome-devtools__close_page",
       "Bash(taskkill //PID 41208 //F)",
-      "Bash(pnpm start *)"
+      "Bash(pnpm start *)",
+      "Bash(taskkill //PID 11716 //F)"
     ]
   }
 }

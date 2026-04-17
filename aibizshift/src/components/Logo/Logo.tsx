@@ -19,7 +19,7 @@ export const Logo = (props: Props) => {
       height={300}
       loading={loading}
       priority={priority === 'high'}
-      className={clsx('h-10 w-auto', className)}
+      className={clsx('h-20 w-auto', className)}
     />
   )
 }

@@ -18,7 +18,7 @@ export default function AProposPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
-                De chez Orange &agrave; l&apos;IA&nbsp;: 35 ans &agrave; r&eacute;soudre des
+                De Orange &agrave; l&apos;IA&nbsp;: 35 ans &agrave; r&eacute;soudre des
                 probl&egrave;mes complexes
               </h1>
               <p className="text-lg text-slate-300 leading-relaxed mt-6">
