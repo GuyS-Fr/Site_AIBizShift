@@ -3,330 +3,321 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rapport de conformité — AIBizShift (re-audit)</title>
+<title>Rapport de conformité — AIBizShift (RGPD + AI Act UE)</title>
 <style>
-  * { box-sizing: border-box; }
+  :root {
+    --green: #10B981;
+    --yellow: #F59E0B;
+    --orange: #F97316;
+    --red: #EF4444;
+    --slate-900: #0F172A;
+    --slate-700: #334155;
+    --slate-500: #64748B;
+    --slate-300: #CBD5E1;
+    --slate-100: #F1F5F9;
+    --blue: #3B82F6;
+  }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: #FAFAFA;
-    color: #1E293B;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 2rem;
+    color: var(--slate-900);
     line-height: 1.6;
-    margin: 0;
-    padding: 0;
+    background: #fafafa;
   }
-  .header {
-    background: linear-gradient(135deg, #064E3B 0%, #10B981 100%);
-    color: white;
-    padding: 3rem 2rem;
-    text-align: center;
-  }
-  .header h1 { margin: 0; font-size: 2.2rem; }
-  .header .subtitle { color: #D1FAE5; margin-top: 0.5rem; }
-  .header .badge { display: inline-block; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 999px; margin-top: 1rem; font-weight: 600; }
-  .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
-  .summary-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
-  }
-  .stat {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid #E2E8F0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
-  .stat .label { color: #64748B; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
-  .stat .value { font-size: 2rem; font-weight: bold; margin-top: 0.5rem; }
-  .stat .delta { font-size: 0.95rem; color: #10B981; font-weight: 600; margin-top: 4px; }
-  .stat .delta-down { color: #10B981; }
-  .stat.score-high .value { color: #10B981; }
-  .stat.score-warn .value { color: #F59E0B; }
-  .stat.score-na .value { color: #64748B; font-size: 1.4rem; }
-  .progress {
-    background: #E2E8F0;
-    border-radius: 999px;
-    height: 24px;
-    margin: 2rem 0;
-    overflow: hidden;
-    position: relative;
-  }
-  .progress-bar {
-    background: linear-gradient(90deg, #10B981 0%, #34D399 100%);
-    height: 100%;
-    border-radius: 999px;
-    transition: width 1s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 0.9rem;
-  }
-  .verdict {
-    background: #ECFDF5;
-    border-left: 4px solid #10B981;
-    padding: 1.5rem;
-    border-radius: 6px;
-    margin: 1.5rem 0;
-  }
-  .compare {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin: 2rem 0;
-  }
-  .compare-card {
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 2px solid;
-  }
-  .compare-card.before { background: #FEF2F2; border-color: #EF4444; }
-  .compare-card.after { background: #ECFDF5; border-color: #10B981; }
-  .compare-card h3 { margin-top: 0; }
-  .compare-card .big { font-size: 3rem; font-weight: bold; margin: 0.5rem 0; }
-  .compare-card.before .big { color: #EF4444; }
-  .compare-card.after .big { color: #10B981; }
-  h2 {
-    color: #0F172A;
-    border-bottom: 2px solid #10B981;
-    padding-bottom: 0.5rem;
-    margin-top: 3rem;
-  }
-  h3 { color: #1E293B; margin-top: 2rem; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  h1 { border-bottom: 3px solid var(--blue); padding-bottom: 0.5rem; }
+  h2 { margin-top: 2.5rem; border-bottom: 1px solid var(--slate-300); padding-bottom: 0.3rem; }
+  h3 { margin-top: 1.8rem; color: var(--slate-700); }
+  h4 { margin-top: 1.3rem; color: var(--slate-700); }
+  blockquote {
+    border-left: 4px solid var(--blue);
+    background: var(--slate-100);
+    padding: 0.7rem 1rem;
     margin: 1rem 0;
+    border-radius: 4px;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: 0.92rem;
     background: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
   }
   th, td {
+    border: 1px solid var(--slate-300);
+    padding: 0.55rem 0.7rem;
     text-align: left;
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #E2E8F0;
     vertical-align: top;
-    font-size: 0.92rem;
   }
-  th { background: #F1F5F9; font-weight: 600; color: #475569; }
-  tr:last-child td { border-bottom: none; }
+  th { background: var(--slate-100); font-weight: 600; }
   code {
-    background: #F1F5F9;
-    color: #0F172A;
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 0.85em;
-    font-family: 'SF Mono', Consolas, monospace;
+    background: var(--slate-100);
+    padding: 0.1rem 0.35rem;
+    border-radius: 3px;
+    font-size: 0.88em;
+    font-family: 'SF Mono', Monaco, monospace;
   }
-  .check-row { background: #ECFDF5; }
-  .finding {
-    background: white;
-    padding: 1.25rem;
-    border-radius: 8px;
-    margin: 1rem 0;
-    border-left: 4px solid #64748B;
+  pre {
+    background: var(--slate-900);
+    color: #E2E8F0;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.85rem;
   }
-  .finding.major { border-left-color: #F97316; background: #FFF7ED; }
-  .finding.minor { border-left-color: #EAB308; background: #FEFCE8; }
-  .finding-id {
-    display: inline-block;
-    background: #1E293B;
+  .score-green { color: var(--green); }
+  .score-yellow { color: var(--yellow); }
+  .score-orange { color: var(--orange); }
+  .score-red { color: var(--red); }
+  .header-banner {
+    background: linear-gradient(135deg, #1E40AF, #3B82F6);
     color: white;
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    margin-right: 0.5rem;
+    padding: 1.5rem 2rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
   }
-  .finding.major .finding-id { background: #F97316; }
-  .finding.minor .finding-id { background: #EAB308; color: #1E293B; }
-  .footer {
+  .header-banner h1 { border: none; margin: 0; color: white; }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .metric-card {
+    background: white;
+    border: 1px solid var(--slate-300);
+    border-radius: 8px;
+    padding: 1rem 1.3rem;
     text-align: center;
-    color: #64748B;
-    padding: 2rem;
-    font-size: 0.9rem;
   }
+  .metric-label { font-size: 0.85rem; color: var(--slate-500); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-value { font-size: 1.8rem; font-weight: bold; color: var(--slate-900); margin-top: 0.3rem; }
+  .finding-major { background: #FFEDD5; border-left: 4px solid var(--orange); padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+  .finding-minor { background: #FEF3C7; border-left: 4px solid var(--yellow); padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+  .finding-new { background: #DBEAFE; border-left: 4px solid var(--blue); padding: 1rem; margin: 1rem 0; border-radius: 4px; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--slate-300); font-size: 0.85rem; color: var(--slate-500); font-style: italic; }
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h1>📋 Rapport de conformité — Re-audit</h1>
-  <div class="subtitle">AIBizShift — RGPD UE + AI Act + nLPD Suisse</div>
-  <div class="subtitle">Audit du 17 avril 2026 (post-correctifs)</div>
-  <div class="badge">🎉 Conformité élevée — 90 %</div>
+<div class="header-banner">
+  <h1>Rapport de conformité — AIBizShift</h1>
+  <p style="margin: 0.5rem 0 0 0; opacity: 0.95;">
+    Audit RGPD + AI Act (UE) — 2026-04-17 (re-audit restreint UE)<br>
+    <strong>Score global : 92 %</strong> 🟢 — Conformité élevée
+  </p>
 </div>
 
-<div class="container">
-
-  <h2>🚀 Évolution depuis l'audit initial</h2>
-
-  <div class="compare">
-    <div class="compare-card before">
-      <h3>Avant correctifs (matin)</h3>
-      <div class="big">49 %</div>
-      <p>🔴 Non-conformité critique</p>
-      <ul>
-        <li><strong>4</strong> findings critiques</li>
-        <li><strong>9</strong> findings majeurs</li>
-        <li><strong>9</strong> findings mineurs</li>
-      </ul>
-    </div>
-    <div class="compare-card after">
-      <h3>Après correctifs (maintenant)</h3>
-      <div class="big">90 %</div>
-      <p>🟢 Conformité élevée</p>
-      <ul>
-        <li><strong>0</strong> findings critiques ✅</li>
-        <li><strong>3</strong> findings majeurs (−6)</li>
-        <li><strong>5</strong> findings mineurs (−4)</li>
-      </ul>
-    </div>
+<div class="metric-grid">
+  <div class="metric-card">
+    <div class="metric-label">Score RGPD UE</div>
+    <div class="metric-value score-green">90 %</div>
   </div>
-
-  <div class="progress">
-    <div class="progress-bar" style="width: 90%;">90 %</div>
+  <div class="metric-card">
+    <div class="metric-label">Score AI Act UE</div>
+    <div class="metric-value score-green">100 %</div>
   </div>
-
-  <h2>📊 Résumé exécutif</h2>
-
-  <div class="summary-grid">
-    <div class="stat score-high">
-      <div class="label">Score global</div>
-      <div class="value">90 % 🟢</div>
-      <div class="delta">↑ +41 pts</div>
-    </div>
-    <div class="stat score-warn">
-      <div class="label">RGPD UE</div>
-      <div class="value">88 % 🟡</div>
-      <div class="delta">↑ +33 pts</div>
-    </div>
-    <div class="stat score-na">
-      <div class="label">AI Act UE</div>
-      <div class="value">N/A — Pas d'IA dans le site</div>
-    </div>
-    <div class="stat score-high">
-      <div class="label">nLPD Suisse</div>
-      <div class="value">92 % 🟢</div>
-      <div class="delta">↑ +49 pts</div>
-    </div>
+  <div class="metric-card">
+    <div class="metric-label">Findings critiques</div>
+    <div class="metric-value score-green">0</div>
   </div>
-
-  <div class="summary-grid">
-    <div class="stat" style="border-left: 4px solid #10B981;">
-      <div class="label">Critiques 🔴</div>
-      <div class="value" style="color: #10B981;">0 ✅</div>
-    </div>
-    <div class="stat" style="border-left: 4px solid #F97316;">
-      <div class="label">Majeurs 🟠</div>
-      <div class="value" style="color: #F97316;">3</div>
-    </div>
-    <div class="stat" style="border-left: 4px solid #EAB308;">
-      <div class="label">Mineurs 🟡</div>
-      <div class="value" style="color: #92400E;">5</div>
-    </div>
-    <div class="stat" style="border-left: 4px solid #3B82F6;">
-      <div class="label">À vérifier 🔍</div>
-      <div class="value" style="color: #3B82F6;">6</div>
-    </div>
+  <div class="metric-card">
+    <div class="metric-label">Findings majeurs</div>
+    <div class="metric-value score-orange">2</div>
   </div>
-
-  <div class="verdict">
-    <strong>Verdict :</strong> Site désormais en <strong>conformité élevée</strong>.
-    Les 4 findings critiques sont tous résolus, 6 majeurs sur 9 sont résolus.
-    Reste à activer le cron Coolify pour la purge auto et finaliser les démarches admin (DPA + TIA Calendly).
+  <div class="metric-card">
+    <div class="metric-label">Findings mineurs</div>
+    <div class="metric-value score-yellow">3</div>
   </div>
+</div>
 
-  <h2>✅ Correctifs déployés (commit 3af6669)</h2>
+<blockquote>
+  <strong>Verdict :</strong> site <strong>conforme RGPD + AI Act</strong> 🟢. Les 3 findings majeurs de l'audit précédent sont réduits à 2 (TIA_CALENDLY.md désormais existant). Les blocages restants sont <strong>administratifs</strong> (cron Coolify à activer, DPA à archiver).
+</blockquote>
 
-  <table>
-    <thead>
-      <tr><th>Type</th><th>#</th><th>Description</th></tr>
-    </thead>
-    <tbody>
-      <tr class="check-row"><td>🔴</td><td>C-01</td><td>Section "Transferts internationaux" + EU-US/Swiss-US DPF Calendly</td></tr>
-      <tr class="check-row"><td>🔴</td><td>C-02</td><td>Section nLPD/PFPDT/DataReg (autorité Suisse)</td></tr>
-      <tr class="check-row"><td>🔴</td><td>C-03</td><td>Suppression <code>tls.rejectUnauthorized: false</code></td></tr>
-      <tr class="check-row"><td>🔴</td><td>C-04</td><td>SIRET réel <code>833 914 989 00029</code></td></tr>
-      <tr class="check-row"><td>🟠</td><td>M-01</td><td>Rate limit 5 req/h/IP + headers <code>X-RateLimit-*</code></td></tr>
-      <tr class="check-row"><td>🟠</td><td>M-02</td><td>Job <code>purgeOldSubmissions</code> 24 mois (Payload Task)</td></tr>
-      <tr class="check-row"><td>🟠</td><td>M-03</td><td>Tableau sous-traitants OVH/Brevo/Calendly</td></tr>
-      <tr class="check-row"><td>🟠</td><td>M-04</td><td>ROPA complet (4 traitements)</td></tr>
-      <tr class="check-row"><td>🟠</td><td>M-05</td><td>INCIDENT_RESPONSE.md (procédure 72h + checklist)</td></tr>
-      <tr class="check-row"><td>🟠</td><td>M-06</td><td>Collection <code>ContactSubmissions</code> (consent + IP hash SHA-256)</td></tr>
-      <tr class="check-row"><td>🟠</td><td>M-07</td><td>Tableau cookies techniques détaillé</td></tr>
-      <tr class="check-row"><td>🟠</td><td>M-09</td><td>Hébergeur OVH (au lieu de Scaleway) partout</td></tr>
-      <tr class="check-row"><td>🟡</td><td>m-01, m-03, m-07, m-08</td><td>Date précise, logs masqués, note Calendly email, section mineurs</td></tr>
-    </tbody>
-  </table>
+<h2>🚀 Évolution depuis l'audit précédent</h2>
+<table>
+  <tr><th>Indicateur</th><th>Audit 2026-04-17 (UE+Suisse)</th><th>Audit actuel (UE seul)</th><th>Δ</th></tr>
+  <tr><td><strong>Score global</strong></td><td>90 % 🟢</td><td><strong>92 %</strong> 🟢</td><td>+2 pts</td></tr>
+  <tr><td>Score RGPD UE</td><td>88 % 🟡</td><td><strong>90 %</strong> 🟢</td><td>+2 pts</td></tr>
+  <tr><td>Score AI Act UE</td><td>N/A</td><td><strong>100 %</strong> 🟢</td><td>acquis via <code>AI_USE_POLICY.md</code></td></tr>
+  <tr><td>Findings critiques 🔴</td><td>0</td><td><strong>0</strong></td><td>= ✅</td></tr>
+  <tr><td>Findings majeurs 🟠</td><td>3</td><td><strong>2</strong></td><td>−1 (M-03 résolu) ✅</td></tr>
+  <tr><td>Findings mineurs 🟡</td><td>5</td><td><strong>3</strong></td><td>−2 (m-01, m-04 résolus) ✅</td></tr>
+</table>
 
-  <h2>🟠 Findings restants (3 majeurs)</h2>
+<h2>Périmètre de l'audit</h2>
+<table>
+  <tr><th>Élément</th><th>Détails</th></tr>
+  <tr><td>Cadre réglementaire</td><td>RGPD (UE 2016/679) + AI Act (UE 2024/1689)</td></tr>
+  <tr><td>Projet audité</td><td><code>C:\DevClaude\Site_AIBizShift\aibizshift</code></td></tr>
+  <tr><td>Stack</td><td>Next.js 16 + Payload CMS 3.81 + PostgreSQL (Coolify Docker, hébergement OVH Roubaix)</td></tr>
+  <tr><td>Composants IA dans le site</td><td><strong>Aucun</strong> (site vitrine statique)</td></tr>
+  <tr><td>Systèmes IA utilisés par l'opérateur</td><td>Claude Code, ChatGPT, fal.ai — documentés dans <code>AI_USE_POLICY.md</code></td></tr>
+</table>
 
-  <div class="finding major">
-    <span class="finding-id">M-01</span><strong>Cron Coolify pour purge auto pas encore activé</strong>
-    <p>Le code est prêt (task <code>purgeOldSubmissions</code>), mais le déclencheur n'est pas configuré côté infra.</p>
-    <p><strong>Action :</strong> dans Coolify, créer un Scheduled Task quotidien :</p>
-    <pre style="background: #1E293B; color: #E2E8F0; padding: 1rem; border-radius: 6px; font-size: 0.85rem; overflow-x: auto;">POST https://aibizshift.eu/api/payload-jobs/run
+<h3>Nouveautés depuis l'audit précédent</h3>
+<ul>
+  <li><code>src/migrations/</code> — système de migrations Payload (auditabilité schéma DB)</li>
+  <li><code>scripts/clear-dev-migration-marker.ts</code> — utilitaire one-shot pour nettoyer marqueur dev-push</li>
+  <li><code>public/images/guy-salvatore.jpg</code> — photo du publicateur (alt text présent)</li>
+  <li><code>public/images/logo3-horizontal-dark.png</code> — logo image</li>
+  <li><code>Doc/COMPLIANCE/AI_USE_POLICY.md</code> — politique d'usage IA (AI Act Art. 4)</li>
+  <li><code>Doc/COMPLIANCE/TIA_CALENDLY.md</code> — TIA Schrems II</li>
+  <li><code>Doc/COMPLIANCE/templates/data-subject-request-response.md</code> — templates DSR</li>
+  <li><code>Doc/COMPLIANCE/README.md</code> — index + statut des actions</li>
+</ul>
+
+<h2>Résultats détaillés — RGPD UE</h2>
+
+<h3>1. Bases légales &amp; Consentement (Art. 6-9)</h3>
+<table>
+  <tr><th>Ref</th><th>Exigence</th><th>Statut</th><th>Constat</th></tr>
+  <tr><td>BL-01</td><td>Base légale identifiée</td><td>✅</td><td>Consentement Art. 6(1)(a)</td></tr>
+  <tr><td>BL-02</td><td>Consentement libre, spécifique, éclairé, univoque</td><td>✅</td><td>Case à cocher dédiée non pré-cochée</td></tr>
+  <tr><td>BL-03</td><td>Retrait aussi simple que l'octroi</td><td>⚠️</td><td>Procédure manuelle par email (acceptable PME)</td></tr>
+  <tr><td>BL-04</td><td>Consentement explicite données sensibles</td><td>⬜</td><td>N/A</td></tr>
+  <tr><td>BL-05</td><td>Vérification d'âge mineurs</td><td>⬜</td><td>N/A (site B2B)</td></tr>
+  <tr><td>BL-06</td><td>Pas de bundling</td><td>✅</td><td>OK</td></tr>
+  <tr><td>BL-07</td><td>Preuves de consentement conservées</td><td>✅</td><td>Collection <code>contact-submissions</code> persiste <code>given</code> + <code>givenAt</code> + <code>ipHash</code></td></tr>
+</table>
+
+<h3>2. Transparence &amp; Information (Art. 12-14)</h3>
+<table>
+  <tr><th>Ref</th><th>Exigence</th><th>Statut</th><th>Constat</th></tr>
+  <tr><td>TR-01</td><td>Politique accessible</td><td>✅</td><td><code>/confidentialite</code></td></tr>
+  <tr><td>TR-02 → TR-09</td><td>Identité, finalités, base légale, destinataires, transferts, conservation, droits, plainte</td><td>✅</td><td>Section complète</td></tr>
+  <tr><td>TR-10</td><td>Source si non collecté</td><td>⬜</td><td>N/A (collecte directe)</td></tr>
+  <tr><td>TR-11</td><td>Langage clair</td><td>✅</td><td>OK</td></tr>
+</table>
+
+<h3>3. Droits des personnes (Art. 15-22)</h3>
+<table>
+  <tr><th>Ref</th><th>Exigence</th><th>Statut</th><th>Constat</th></tr>
+  <tr><td>DP-01</td><td>Délai de réponse 1 mois</td><td>✅</td><td>30 jours annoncés + procédure DSR</td></tr>
+  <tr><td>DP-02 → DP-07</td><td>Droits implémentés</td><td>⚠️</td><td>Procédure manuelle + templates (acceptable PME)</td></tr>
+  <tr><td>DP-08 / DP-09</td><td>Marketing / décisions auto</td><td>⬜</td><td>N/A</td></tr>
+  <tr><td>DP-10</td><td>Point de contact</td><td>✅</td><td><code>contact@aibizshift.eu</code></td></tr>
+</table>
+
+<h3>4. Registre des traitements — ROPA (Art. 30)</h3>
+<p>✅ <code>Doc/COMPLIANCE/ROPA.md</code> complet — 4 traitements documentés. Revue annuelle prévue 2027-04-17.</p>
+
+<h3>5. Sous-traitance — DPA (Art. 28)</h3>
+<p>🔍 Sous-traitants tracés (OVH, Brevo, Calendly, fal.ai), mais <strong>DPA non archivés localement</strong> (finding M-02). ✅ Sous-traitants hors UE couverts par EU-US DPF (Calendly).</p>
+
+<h3>6. Sécurité (Art. 32)</h3>
+<table>
+  <tr><th>Ref</th><th>Exigence</th><th>Statut</th><th>Constat</th></tr>
+  <tr><td>SE-01</td><td>Chiffrement</td><td>✅</td><td>HTTPS Let's Encrypt + TLS SMTP Brevo</td></tr>
+  <tr><td>SE-02</td><td>Pseudonymisation</td><td>✅</td><td>IP hashée SHA-256(<code>PAYLOAD_SECRET</code>+IP) tronquée 16 chars</td></tr>
+  <tr><td>SE-03</td><td>CIA</td><td>✅</td><td>ACL Payload + backups quotidiens OVH</td></tr>
+  <tr><td>SE-04/05</td><td>Résilience / Restauration</td><td>🔍</td><td>À documenter</td></tr>
+  <tr><td>SE-06</td><td>Tests de sécurité réguliers</td><td>⚠️</td><td>Pas de pentest annuel (m-02 backlog)</td></tr>
+  <tr><td>SE-07</td><td>Moindre privilège</td><td>✅</td><td>Accès DB restreint</td></tr>
+  <tr><td>SE-08</td><td>Journalisation</td><td>⚠️</td><td>Logs PII masquée <code>name [code]</code> uniquement</td></tr>
+  <tr><td>SE-EXTRA</td><td>Rate limiting</td><td>✅</td><td>5 req/h/IP</td></tr>
+  <tr><td>SE-EXTRA</td><td><strong>Auditabilité schéma DB (Art. 25 PbD)</strong></td><td>✅</td><td><strong>NOUVEAU</strong> : migrations Payload avec auto-apply prod</td></tr>
+</table>
+
+<h3>7. Notification de violation (Art. 33-34)</h3>
+<p>✅ <code>INCIDENT_RESPONSE.md</code> avec procédure 72h + templates. Registre <code>breach-log.md</code> à créer au 1er incident (format défini).</p>
+
+<h3>8. Transferts internationaux (Art. 44-49)</h3>
+<p>✅ Calendly + fal.ai (USA) documentés. EU-US DPF invoqué. <strong>TIA Schrems II réalisé</strong> (<code>TIA_CALENDLY.md</code>).</p>
+
+<h3>9. Privacy by Design (Art. 25) &amp; Cookies</h3>
+<p>✅ Minimisation + conservation automatisée (task <code>purgeOldSubmissions</code> 24 mois — cron Coolify à activer, M-01). ✅ Aucun cookie non essentiel. Tableau cookies techniques (<code>theme-preference</code>, <code>payload-token</code>) dans <code>/confidentialite</code>.</p>
+
+<h2>Résultats détaillés — AI Act UE</h2>
+<blockquote>Site vitrine <strong>sans IA embarquée</strong>. L'opérateur <strong>vend des services IA</strong> → rôle de déployeur/fournisseur encadré par <code>AI_USE_POLICY.md</code>.</blockquote>
+
+<h3>Pré-classification, pratiques interdites, littératie</h3>
+<table>
+  <tr><th>Catégorie</th><th>Statut</th><th>Constat</th></tr>
+  <tr><td>PC-01 à PC-04 — Classification</td><td>✅</td><td>Site : pas d'IA. Services vendus : déployeur, risque minimal</td></tr>
+  <tr><td>PI-01 à PI-08 — Pratiques interdites (Art. 5)</td><td>✅</td><td>Aucune pratique interdite (inventaire <code>AI_USE_POLICY.md</code> §4)</td></tr>
+  <tr><td>LI-01 à LI-03 — Littératie IA (Art. 4)</td><td>✅</td><td>Formation documentée, inventaire systèmes, adaptation contexte</td></tr>
+  <tr><td>HR-01 à HR-03 — Haut risque</td><td>⬜</td><td>N/A (aucun cas Annexe III)</td></tr>
+  <tr><td>OT-01 à OT-05 — Transparence (Art. 50)</td><td>⬜</td><td>N/A (pas de chatbot, deepfake, etc. sur le site)</td></tr>
+  <tr><td>GP/EI — GPAI &amp; Droits fondamentaux</td><td>⬜</td><td>N/A</td></tr>
+</table>
+
+<h2>Findings restants par priorité</h2>
+
+<h3>🟠 Majeurs — action sous 30 jours (2)</h3>
+
+<div class="finding-major">
+  <h4>M-01 — Cron Coolify pour purge auto pas encore activé</h4>
+  <p><strong>Réf</strong> : RGPD Art. 5(1)(e) (limitation de conservation)</p>
+  <p><strong>Statut</strong> : code prêt (<code>purgeOldSubmissions.ts</code>) + endpoint prêt (<code>/api/payload-jobs/run</code> + <code>CRON_SECRET</code>), déclencheur cron manquant</p>
+  <p><strong>Action</strong> : Coolify → créer Scheduled Task quotidien :</p>
+  <pre>POST https://aibizshift.eu/api/payload-jobs/run
 Headers: Authorization: Bearer $CRON_SECRET
 Body: {"queue":"default"}</pre>
-    <p><strong>Effort :</strong> 5 min admin Coolify</p>
-  </div>
-
-  <div class="finding major">
-    <span class="finding-id">M-02</span><strong>DPA sous-traitants à archiver</strong>
-    <p>Sous-traitants identifiés (OVH, Brevo, Calendly) mais aucun DPA signé/téléchargé localement.</p>
-    <p><strong>Action :</strong> créer <code>Doc/COMPLIANCE/dpa-signed/</code> et y placer les DPA depuis :</p>
-    <ul>
-      <li>OVH : <code>https://www.ovhcloud.com/fr/personal-data-protection/data-processing/</code></li>
-      <li>Brevo : <code>https://www.brevo.com/legal/dpa/</code></li>
-      <li>Calendly : <code>https://calendly.com/dpa</code></li>
-    </ul>
-    <p><strong>Effort :</strong> 30 min</p>
-  </div>
-
-  <div class="finding major">
-    <span class="finding-id">M-03</span><strong>TIA (Transfer Impact Assessment) Calendly à formaliser</strong>
-    <p>DPF invoqué (suffisant juridiquement), mais TIA recommandé par l'EDPB post-Schrems II pour démontrer la diligence raisonnable.</p>
-    <p><strong>Action :</strong> créer <code>Doc/COMPLIANCE/TIA_CALENDLY.md</code> mentionné dans le ROPA.</p>
-    <p><strong>Effort :</strong> 1 h</p>
-  </div>
-
-  <h2>🟡 Findings mineurs (5)</h2>
-
-  <div class="finding minor"><span class="finding-id">m-01</span> Procédure DP-02→DP-07 manuelle (acceptable PME) — créer template <code>data-subject-request-response.md</code>.</div>
-  <div class="finding minor"><span class="finding-id">m-02</span> Pas de tests de sécurité réguliers (recommandation OWASP ZAP annuel).</div>
-  <div class="finding minor"><span class="finding-id">m-03</span> Pas de CGV/CGS pour services vendus (hors site mais lié au business).</div>
-  <div class="finding minor"><span class="finding-id">m-04</span> Pas de politique d'usage IA documentée (AI Act Art. 4 littératie).</div>
-  <div class="finding minor"><span class="finding-id">m-05</span> Hashage Payload PBKDF2 vs Argon2id (faible priorité solo).</div>
-
-  <h2>📅 Plan de remédiation</h2>
-
-  <table>
-    <thead>
-      <tr><th>Priorité</th><th>#</th><th>Action</th><th>Effort</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>🟠</td><td>M-01</td><td>Activer cron Coolify pour task <code>purgeOldSubmissions</code></td><td>5 min admin</td></tr>
-      <tr><td>🟠</td><td>M-02</td><td>Télécharger et archiver DPA OVH/Brevo/Calendly</td><td>30 min</td></tr>
-      <tr><td>🟠</td><td>M-03</td><td>Rédiger TIA Calendly</td><td>1 h</td></tr>
-      <tr><td>🟡</td><td>m-01</td><td>Template réponse demandes droits</td><td>30 min</td></tr>
-      <tr><td>🟡</td><td>m-02</td><td>Pentest annuel OWASP ZAP</td><td>2 h</td></tr>
-      <tr><td>🟡</td><td>m-03</td><td>CGV/CGS services</td><td>4 h</td></tr>
-      <tr><td>🟡</td><td>m-04</td><td>AI_USE_POLICY.md</td><td>1 h</td></tr>
-      <tr><td>🟡</td><td>m-05</td><td>Migration Argon2id</td><td>2 h</td></tr>
-    </tbody>
-  </table>
-
-  <p><strong>Total effort restant pour 100 % conformité : ~10-12 h.</strong></p>
-
+  <p><strong>Effort</strong> : 5 min admin</p>
 </div>
 
-<div class="footer">
-  Rapport généré par le skill <code>/compliance</code> v1 — 17 avril 2026 (re-audit post-correctifs)<br>
-  Voir aussi : <code>COMPLIANCE_REPORT.md</code> pour les détails complets
+<div class="finding-major">
+  <h4>M-02 — DPA sous-traitants à archiver localement</h4>
+  <p><strong>Réf</strong> : RGPD Art. 28(3)</p>
+  <p><strong>Statut</strong> : sous-traitants tracés dans ROPA mais DPA non archivés dans le repo</p>
+  <p><strong>Action</strong> : créer <code>aibizshift/Doc/COMPLIANCE/dpa-signed/</code> avec OVH, Brevo, Calendly, fal.ai</p>
+  <p><strong>Effort</strong> : 30 min</p>
 </div>
+
+<h3>🟡 Mineurs — amélioration continue (3)</h3>
+
+<div class="finding-minor">
+  <h4>m-02 — Pas de tests de sécurité réguliers</h4>
+  <p><strong>Réf</strong> : RGPD Art. 32(1)(d) • <strong>Effort</strong> : 2 h</p>
+  <p>OWASP ZAP annuel + <code>pnpm audit</code> dans CI</p>
+</div>
+
+<div class="finding-minor">
+  <h4>m-03 — CGV/CGS services vendus non formalisés</h4>
+  <p><strong>Réf</strong> : Code de la conso + AI Act • <strong>Effort</strong> : 4 h avec avocat</p>
+</div>
+
+<div class="finding-minor">
+  <h4>m-05 — Hashage admin Payload : PBKDF2 par défaut</h4>
+  <p>Argon2id préférable. Pas critique pour admin solo. <strong>Effort</strong> : 2 h</p>
+</div>
+
+<h3>🆕 Finding issu des nouveautés</h3>
+
+<div class="finding-new">
+  <h4>n-01 — Script <code>clear-dev-migration-marker.ts</code> — documentation manquante</h4>
+  <p><strong>Constat</strong> : utilise <code>pg.Pool(DATABASE_URL)</code> pour DELETE sur <code>payload_migrations</code>. Si relancé accidentellement contre la prod, corrompt le tracking.</p>
+  <p><strong>Risque</strong> : faible (pas dans <code>package.json</code>, exécution manuelle requise).</p>
+  <p><strong>Action</strong> : en-tête warning dans le fichier + note dans <code>CLAUDE.md</code>. <strong>Effort</strong> : 5 min.</p>
+</div>
+
+<h2>Plan de remédiation</h2>
+<table>
+  <tr><th>Priorité</th><th>#</th><th>Action</th><th>Réf. légale</th><th>Effort</th><th>Statut</th></tr>
+  <tr><td>🟠</td><td>M-01</td><td>Activer cron Coolify pour <code>purgeOldSubmissions</code></td><td>RGPD Art. 5(1)(e)</td><td>5 min</td><td>À faire</td></tr>
+  <tr><td>🟠</td><td>M-02</td><td>Archiver DPA OVH/Brevo/Calendly/fal.ai</td><td>RGPD Art. 28(3)</td><td>30 min</td><td>À faire</td></tr>
+  <tr><td>🟡</td><td>m-02</td><td>Pentest annuel + <code>pnpm audit</code> CI</td><td>RGPD Art. 32(1)(d)</td><td>2 h</td><td>Backlog</td></tr>
+  <tr><td>🟡</td><td>m-03</td><td>CGV/CGS services vendus</td><td>Code conso + AI Act</td><td>4 h</td><td>Backlog</td></tr>
+  <tr><td>🟡</td><td>m-05</td><td>Migration Argon2id</td><td>RGPD Art. 32</td><td>2 h</td><td>Backlog</td></tr>
+  <tr><td>🟡</td><td>n-01</td><td>Documenter script migration-marker</td><td>Bonne pratique</td><td>5 min</td><td>À faire</td></tr>
+</table>
+<p><strong>Total effort restant pour 100 % : ~3 h d'action + 8 h de backlog</strong></p>
+
+<h2>Sources et références</h2>
+<ul>
+  <li><strong>RGPD</strong> (Règlement UE 2016/679) : <a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj">eur-lex.europa.eu</a></li>
+  <li><strong>AI Act</strong> (Règlement UE 2024/1689) : <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:32024R1689">eur-lex.europa.eu</a></li>
+  <li><strong>CNIL</strong> : <a href="https://www.cnil.fr">cnil.fr</a> • Notifications violations : <a href="https://notifications.cnil.fr/notifications/index">notifications.cnil.fr</a></li>
+  <li><strong>EDPB</strong> : <a href="https://edpb.europa.eu/">edpb.europa.eu</a></li>
+  <li><strong>EU-US Data Privacy Framework</strong> : <a href="https://www.dataprivacyframework.gov/list">dataprivacyframework.gov/list</a></li>
+</ul>
+
+<footer>
+  Rapport généré par le skill <code>/compliance</code> v1 — 2026-04-17 (re-audit UE uniquement)
+</footer>
 
 </body>
 </html>

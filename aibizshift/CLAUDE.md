@@ -195,7 +195,9 @@ pnpm payload migrate                # applique (local)
 
 ### Script utilitaire
 
-`scripts/clear-dev-migration-marker.ts` — supprime la ligne `batch=-1` de `payload_migrations` (marqueur dev-push) si la DB a ete alimentee en push mode avant l'adoption des migrations. A run une seule fois par DB : `pnpm tsx scripts/clear-dev-migration-marker.ts`.
+`scripts/clear-dev-migration-marker.ts` — supprime la ligne `batch=-1` de `payload_migrations` (marqueur dev-push) si la DB a ete alimentee en push mode avant l'adoption des migrations.
+
+> ⚠️ **SCRIPT ONE-SHOT** : à run **une seule fois par DB**, jamais en production en routine. Volontairement non reference dans `package.json` pour eviter toute execution automatique. Commande manuelle : `pnpm tsx scripts/clear-dev-migration-marker.ts`. Voir l'en-tete du fichier pour les conditions d'utilisation.
 
 ## Problemes resolus (reference)
 

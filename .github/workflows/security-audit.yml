@@ -1,0 +1,46 @@
+name: Security audit
+
+on:
+  pull_request:
+    paths:
+      - 'aibizshift/package.json'
+      - 'aibizshift/pnpm-lock.yaml'
+      - '.github/workflows/security-audit.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'aibizshift/package.json'
+      - 'aibizshift/pnpm-lock.yaml'
+  schedule:
+    # Tous les lundis à 08:00 UTC — couverture nouvelles CVE publiées le week-end
+    - cron: '0 8 * * 1'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    name: pnpm audit (high + critical)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: aibizshift
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: aibizshift/pnpm-lock.yaml
+
+      - name: Install dependencies (frozen)
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit dependencies (high + critical only)
+        # pnpm audit exit code:
+        #   0 = no vulns at specified level
+        #   1 = vulns found → fails the job
+        run: pnpm audit --audit-level high
