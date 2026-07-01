@@ -4,11 +4,11 @@ import Image from 'next/image'
 export const metadata: Metadata = {
   title: 'Nos Services — AIBizShift | Consulting IA, Sites Web, Formation, Automatisation',
   description:
-    "Découvrez nos 10 services pour transformer votre entreprise avec l'IA : consulting, création de sites web, formation, développement SaaS, conciergerie IA, chatbots, marketing automation. Valence, Drôme — France entière.",
+    "Découvrez nos 11 services pour transformer votre entreprise avec l'IA : consulting, création de sites web, formation, développement SaaS, conciergerie IA, chatbots, marketing automation. Valence, Drôme — France entière.",
   openGraph: {
     title: 'Services AIBizShift — Consultant IA & Automatisation pour PME',
     description:
-      "10 services concrets pour automatiser, former et développer votre entreprise grâce à l'IA.",
+      "11 services concrets pour automatiser, former et développer votre entreprise grâce à l'IA.",
     url: 'https://aibizshift.eu/services',
     siteName: 'AIBizShift',
     locale: 'fr_FR',
@@ -25,7 +25,7 @@ export default function ServicesPage() {
       <section className="bg-[#0F172A] py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <span className="inline-block text-sm bg-blue-500/10 text-blue-400 px-4 py-1.5 rounded-full border border-blue-500/20 mb-6">
-            10 services pour transformer votre entreprise
+            11 services pour transformer votre entreprise
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
             Des solutions IA concr&egrave;tes, pas des promesses
@@ -390,6 +390,96 @@ export default function ServicesPage() {
                   >
                     Discuter de mon projet &rarr;
                   </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* OFFRE 5 — Agent Vocal IA */}
+          <div className="bg-white rounded-2xl border border-[#E2E8F0] p-8 md:p-12 mt-12">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <svg
+                  className="w-12 h-12 text-blue-500 mb-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
+                  />
+                </svg>
+                <h3 className="text-2xl md:text-3xl font-semibold text-slate-800">
+                  Agent Vocal IA &mdash; Standard t&eacute;l&eacute;phonique intelligent
+                </h3>
+                <p className="text-lg text-slate-600 leading-relaxed mt-4">
+                  Vos clients tombent sur un r&eacute;pondeur ou une ligne occup&eacute;e ? Je
+                  d&eacute;ploie un agent vocal qui d&eacute;croche 24/7, prend les commandes ou les
+                  rendez-vous par t&eacute;l&eacute;phone en fran&ccedil;ais, reconna&icirc;t vos
+                  habitu&eacute;s et transmet en temps r&eacute;el &agrave; votre &eacute;quipe. Un
+                  agent qui conna&icirc;t votre m&eacute;tier et votre carte &mdash; pas un bot
+                  g&eacute;n&eacute;rique.
+                </p>
+                <ul className="mt-6 space-y-3">
+                  <li className="flex items-start gap-3">
+                    <span className="text-green-500 font-bold mt-0.5">&#10003;</span>
+                    <span className="text-slate-600">
+                      D&eacute;croche 24/7 &mdash; commandes et prises de rendez-vous par
+                      t&eacute;l&eacute;phone
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-green-500 font-bold mt-0.5">&#10003;</span>
+                    <span className="text-slate-600">
+                      Reconna&icirc;t vos habitu&eacute;s et leurs pr&eacute;f&eacute;rences
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-green-500 font-bold mt-0.5">&#10003;</span>
+                    <span className="text-slate-600">
+                      Calcule le total depuis votre carte (jamais un prix invent&eacute;)
+                    </span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="text-green-500 font-bold mt-0.5">&#10003;</span>
+                    <span className="text-slate-600">
+                      Transmission temps r&eacute;el (cuisine, &eacute;quipe, caisse) &mdash;
+                      h&eacute;bergement souverain
+                    </span>
+                  </li>
+                </ul>
+                <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-200">
+                  <span className="text-slate-500">Sur devis</span>
+                  <a
+                    href={CALENDLY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-700 font-semibold"
+                  >
+                    Discuter de mon projet &rarr;
+                  </a>
+                </div>
+              </div>
+              <div>
+                {/* Placeholder: swap for <Image src="/images/service-agent-vocal.png" width={600} height={400} .../> once the visual is generated */}
+                <div className="rounded-xl shadow-lg w-full aspect-[3/2] bg-gradient-to-br from-[#0F172A] to-slate-800 flex flex-col items-center justify-center gap-3">
+                  <svg
+                    className="w-14 h-14 text-blue-400/70"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
+                    />
+                  </svg>
+                  <span className="text-slate-400 text-sm">Visuel &agrave; venir</span>
                 </div>
               </div>
             </div>
