@@ -464,23 +464,13 @@ export default function ServicesPage() {
                 </div>
               </div>
               <div>
-                {/* Placeholder: swap for <Image src="/images/service-agent-vocal.png" width={600} height={400} .../> once the visual is generated */}
-                <div className="rounded-xl shadow-lg w-full aspect-[3/2] bg-gradient-to-br from-[#0F172A] to-slate-800 flex flex-col items-center justify-center gap-3">
-                  <svg
-                    className="w-14 h-14 text-blue-400/70"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"
-                    />
-                  </svg>
-                  <span className="text-slate-400 text-sm">Visuel &agrave; venir</span>
-                </div>
+                <Image
+                  src="/images/service-agent-vocal.png"
+                  alt="Agent vocal IA : appel téléphonique traité en temps réel, client reconnu et commande transmise"
+                  width={600}
+                  height={400}
+                  className="rounded-xl shadow-lg w-full"
+                />
               </div>
             </div>
           </div>
