@@ -4,7 +4,7 @@ import Image from 'next/image'
 export const metadata: Metadata = {
   title: 'Portfolio \u2014 AIBizShift | Projets IA, Sites Web, Automatisation',
   description:
-    "D\u00e9couvrez les projets r\u00e9alis\u00e9s par AIBizShift : plateforme SaaS OnPulse, sites web, workflows d'automatisation, chatbots IA. Valence, Dr\u00f4me.",
+    "D\u00e9couvrez les projets r\u00e9alis\u00e9s par AIBizShift : plateforme SaaS OnPulse, sites web, workflows d'automatisation, agent vocal t\u00e9l\u00e9phonique, chatbots IA. Valence, Dr\u00f4me.",
 }
 
 const CALENDLY_URL = 'https://calendly.com/guy-salvatore/30min'
@@ -195,6 +195,52 @@ export default function PortfolioPage() {
                   height={600}
                   className="w-full h-full object-cover"
                 />
+              </div>
+            </div>
+          </div>
+
+          {/* PROJET 5 — Agent vocal IA (Hackathon juin 2026) */}
+          <div className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden shadow-sm mt-12">
+            <div className="grid md:grid-cols-2 gap-0">
+              <div className="bg-slate-700 min-h-[16rem] flex items-center justify-center">
+                <span className="text-slate-400 text-sm">Capture &agrave; venir</span>
+              </div>
+              <div className="p-8 md:p-10">
+                <span className="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">
+                  Hackathon &middot; juin 2026
+                </span>
+                <h2 className="text-2xl font-semibold text-slate-800 mt-4">
+                  Agent vocal IA &mdash; le standard t&eacute;l&eacute;phonique qui ne rate plus un
+                  appel
+                </h2>
+                <p className="text-slate-600 mt-4 leading-relaxed">
+                  En 2 semaines, j&apos;ai con&ccedil;u et d&eacute;ploy&eacute; en production un
+                  agent vocal qui prend les commandes t&eacute;l&eacute;phoniques d&apos;un
+                  commerce&nbsp;: il d&eacute;croche, comprend la commande en fran&ccedil;ais
+                  &agrave; la vol&eacute;e, recalcule le total &agrave; partir de la carte (jamais un
+                  prix invent&eacute;), reconna&icirc;t les habitu&eacute;s et envoie la commande en
+                  cuisine en temps r&eacute;el. Un seul moteur, plusieurs m&eacute;tiers
+                  (restauration, artisan) rout&eacute;s par num&eacute;ro. Valid&eacute; sur le
+                  terrain aupr&egrave;s de commerces de Valence, et identification d&apos;un canal de
+                  distribution (un &eacute;diteur r&eacute;gional de logiciel de caisse pour la
+                  restauration, ~50 &eacute;tablissements). Ce que &ccedil;a prouve&nbsp;: un agent
+                  vocal qui conna&icirc;t le m&eacute;tier bat un bot g&eacute;n&eacute;rique
+                  &mdash; pas sur la technique (commoditis&eacute;e), mais sur la profondeur
+                  m&eacute;tier, la conformit&eacute; fran&ccedil;aise et la distribution.
+                </p>
+                <div className="mt-4">
+                  <div className="text-sm font-semibold text-slate-500 uppercase mb-2">
+                    Technologies
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <TechBadge>Python (FastAPI)</TechBadge>
+                    <TechBadge>Twilio</TechBadge>
+                    <TechBadge>Voix temps r&eacute;el (speech-to-speech)</TechBadge>
+                    <TechBadge>Multi-tenant</TechBadge>
+                    <TechBadge>Telegram</TechBadge>
+                    <TechBadge>Coolify</TechBadge>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

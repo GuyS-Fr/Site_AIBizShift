@@ -34,7 +34,9 @@
       "Bash(pnpm update *)",
       "Bash(pnpm why *)",
       "Bash(pnpm install *)",
-      "Bash(sed 's/[^A-Za-z_0-9].*//')"
+      "Bash(sed 's/[^A-Za-z_0-9].*//')",
+      "Bash(claude update *)",
+      "PowerShell(git *)"
     ]
   }
 }
