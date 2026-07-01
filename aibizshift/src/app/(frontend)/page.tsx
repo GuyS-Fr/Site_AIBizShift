@@ -82,8 +82,8 @@ export default function HomePage() {
                 <div className="text-sm text-slate-400 mt-1">d&apos;expertise IT</div>
               </div>
               <div>
-                <div className="text-xl font-bold text-amber-400">n8n Hackathon</div>
-                <div className="text-sm text-slate-400 mt-1">2026</div>
+                <div className="text-xl font-bold text-amber-400">2 hackathons</div>
+                <div className="text-sm text-slate-400 mt-1">IA &middot; 2026</div>
               </div>
               <div>
                 <div className="text-2xl md:text-3xl font-bold text-amber-400">40+</div>
