@@ -452,7 +452,12 @@ export default function ServicesPage() {
                   </li>
                 </ul>
                 <div className="flex justify-between items-center mt-8 pt-6 border-t border-slate-200">
-                  <span className="text-slate-500">Sur devis</span>
+                  <a
+                    href="/agent-vocal"
+                    className="text-slate-500 hover:text-slate-700 font-semibold"
+                  >
+                    Voir le cas concret &rarr;
+                  </a>
                   <a
                     href={CALENDLY_URL}
                     target="_blank"
