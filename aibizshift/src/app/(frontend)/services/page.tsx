@@ -417,7 +417,8 @@ export default function ServicesPage() {
                 </h3>
                 <p className="text-lg text-slate-600 leading-relaxed mt-4">
                   Vos clients tombent sur un r&eacute;pondeur ou une ligne occup&eacute;e ? Je
-                  d&eacute;ploie un agent vocal qui d&eacute;croche 24/7, prend les commandes ou les
+                  con&ccedil;ois et d&eacute;ploie un agent vocal qui d&eacute;croche 24/7, prend les
+                  commandes ou les
                   rendez-vous par t&eacute;l&eacute;phone en fran&ccedil;ais, reconna&icirc;t vos
                   habitu&eacute;s et transmet en temps r&eacute;el &agrave; votre &eacute;quipe. Un
                   agent qui conna&icirc;t votre m&eacute;tier et votre carte &mdash; pas un bot
