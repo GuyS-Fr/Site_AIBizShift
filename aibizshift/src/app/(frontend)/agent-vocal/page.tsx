@@ -25,17 +25,19 @@ export default function AgentVocalPage() {
       <section className="bg-[#0F172A] py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <span className="inline-block text-sm bg-orange-500/10 text-orange-400 px-4 py-1.5 rounded-full border border-orange-500/20 mb-6">
-            Cas concret &middot; Hackathon juin 2026
+            D&eacute;monstrateur terrain &middot; Hackathon juin 2026
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight">
             Un agent vocal qui d&eacute;croche et prend la commande. En vrai.
           </h1>
           <p className="text-lg md:text-xl text-slate-300 leading-relaxed mt-6 max-w-2xl mx-auto">
-            En 2 semaines, j&apos;ai con&ccedil;u et d&eacute;ploy&eacute; un agent vocal pour un
-            commerce de restauration rapide &agrave; Valence. Il d&eacute;croche, comprend la
-            commande en fran&ccedil;ais, reconna&icirc;t les habitu&eacute;s et l&apos;envoie en
-            cuisine &mdash; en temps r&eacute;el. Voici comment, et ce que &ccedil;a ouvre pour votre
-            m&eacute;tier.
+            En 2 semaines, j&apos;ai construit un d&eacute;monstrateur fonctionnel d&apos;agent vocal
+            pour un commerce de restauration rapide, et je l&apos;ai mis &agrave;
+            l&apos;&eacute;preuve sur le terrain. Il d&eacute;croche, comprend la commande en
+            fran&ccedil;ais, reconna&icirc;t les habitu&eacute;s et l&apos;envoie en cuisine &mdash;
+            en temps r&eacute;el. Il n&apos;est pas encore en production&nbsp;: c&apos;est la preuve
+            que &ccedil;a marche, avant d&apos;industrialiser. Voici comment &mdash; et ce que
+            &ccedil;a ouvre pour votre m&eacute;tier.
           </p>
           <div className="mt-8">
             <a

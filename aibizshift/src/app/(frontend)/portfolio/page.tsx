@@ -214,14 +214,15 @@ export default function PortfolioPage() {
                   appel
                 </h2>
                 <p className="text-slate-600 mt-4 leading-relaxed">
-                  En 2 semaines, j&apos;ai con&ccedil;u et d&eacute;ploy&eacute; en production un
-                  agent vocal qui prend les commandes t&eacute;l&eacute;phoniques d&apos;un
+                  En 2 semaines, j&apos;ai con&ccedil;u et construit un d&eacute;monstrateur
+                  fonctionnel d&apos;agent vocal qui prend les commandes
+                  t&eacute;l&eacute;phoniques d&apos;un
                   commerce&nbsp;: il d&eacute;croche, comprend la commande en fran&ccedil;ais
                   &agrave; la vol&eacute;e, recalcule le total &agrave; partir de la carte (jamais un
                   prix invent&eacute;), reconna&icirc;t les habitu&eacute;s et envoie la commande en
                   cuisine en temps r&eacute;el. Un seul moteur, plusieurs m&eacute;tiers
                   (restauration, artisan) rout&eacute;s par num&eacute;ro. Valid&eacute; sur le
-                  terrain aupr&egrave;s de commerces de Valence, et identification d&apos;un canal de
+                  terrain aupr&egrave;s de commerces, et identification d&apos;un canal de
                   distribution (un &eacute;diteur r&eacute;gional de logiciel de caisse pour la
                   restauration, ~50 &eacute;tablissements). Ce que &ccedil;a prouve&nbsp;: un agent
                   vocal qui conna&icirc;t le m&eacute;tier bat un bot g&eacute;n&eacute;rique
